@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 107 46" width="428" height="184">
+  <defs><filter id="neon" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.4"/></filter></defs>
+  <path fill="#0B1733" fill-rule="evenodd" d="M0 0H15A10.5 10.5 0 0 1 15 21H7V36H0Z M7 7H15A3.5 3.5 0 0 1 15 14H7Z"/>
+  <path fill="#0B1733" d="M12.5 24H20L29.5 36H22Z"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="#83FD80" stroke-opacity=".35" stroke-width="6" filter="url(#neon)" d="M39.5 2.5H48.5A7.25 7.25 0 0 1 48.5 17H44M44 17H49.5A8.25 8.25 0 0 1 49.5 33.5H39.5"/>
+    <path stroke="#0B1733" stroke-width="6.6" d="M39.5 2.5H48.5A7.25 7.25 0 0 1 48.5 17H44M44 17H49.5A8.25 8.25 0 0 1 49.5 33.5H39.5"/>
+    <path stroke="#83FD80" stroke-width="5" d="M39.5 2.5H48.5A7.25 7.25 0 0 1 48.5 17H44M44 17H49.5A8.25 8.25 0 0 1 49.5 33.5H39.5"/>
+    <path stroke="#F2FFF2" stroke-opacity=".55" stroke-width="1.4" d="M39.5 2.5H48.5A7.25 7.25 0 0 1 48.5 17H44M44 17H49.5A8.25 8.25 0 0 1 49.5 33.5H39.5"/>
+  </g>
+  <path fill="none" stroke="#0B1733" stroke-width="7" d="M70.5 10V27.25A5.75 5.75 0 0 0 82 27.25V18M82 27.25A5.75 5.75 0 0 0 93.5 27.25V10"/>
+</svg>

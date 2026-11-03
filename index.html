@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>R3w Development | Site-uri web, automatizări și securitate</title>
+  <meta name="description" content="Construiesc site-uri rapide și curate, automatizez sarcinile repetitive și verific site-ul tău de vulnerabilități.">
+  <meta name="theme-color" content="#040A18">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script>
+    // Set the theme before the page paints, so there is no flash of the wrong colours
+    (function () {
+      var root = document.documentElement, saved;
+      root.classList.add('js');
+      try { saved = localStorage.getItem('theme'); } catch (e) {}
+      root.dataset.theme = saved || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    })();
+  </script>
+</head>
+<body>
+
+  <div class="backdrop" aria-hidden="true">
+    <div class="orb orb--sapphire"></div>
+    <div class="orb orb--ocean"></div>
+    <div class="orb orb--jade"></div>
+  </div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="top">
+    <div class="container nav__inner">
+      <a href="#top" class="logo" aria-label="R3w Development">
+        <svg class="wordmark" viewBox="-5 -5 107 46" width="79" height="34" aria-hidden="true">
+          <defs><filter id="neon-nav" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.4"/></filter></defs>
+          <path fill="currentColor" fill-rule="evenodd" d="M0 0H15A10.5 10.5 0 0 1 15 21H7V36H0Z M7 7H15A3.5 3.5 0 0 1 15 14H7Z"/>
+          <path fill="currentColor" d="M12.5 24H20L29.5 36H22Z"/>
+          <g class="neon" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path class="neon__glow" stroke-width="6" filter="url(#neon-nav)" d="M39.5 2.5H48.5A7.25 7.25 0 0 1 48.5 17H44M44 17H49.5A8.25 8.25 0 0 1 49.5 33.5H39.5"/>
+            <path class="neon__outline" stroke-width="6.6" d="M39.5 2.5H48.5A7.25 7.25 0 0 1 48.5 17H44M44 17H49.5A8.25 8.25 0 0 1 49.5 33.5H39.5"/>
+            <path class="neon__tube" stroke-width="5" d="M39.5 2.5H48.5A7.25 7.25 0 0 1 48.5 17H44M44 17H49.5A8.25 8.25 0 0 1 49.5 33.5H39.5"/>
+            <path class="neon__core" stroke-width="1.4" d="M39.5 2.5H48.5A7.25 7.25 0 0 1 48.5 17H44M44 17H49.5A8.25 8.25 0 0 1 49.5 33.5H39.5"/>
+          </g>
+          <path fill="none" stroke="currentColor" stroke-width="7" d="M70.5 10V27.25A5.75 5.75 0 0 0 82 27.25V18M82 27.25A5.75 5.75 0 0 0 93.5 27.25V10"/>
+        </svg>
+      </a>
+
+      <nav class="nav__menu" id="nav-menu">
+        <a href="#about" data-i18n="nav.about">Despre</a>
+        <a href="#solutions" data-i18n="nav.solutions">Servicii</a>
+        <a href="#work" data-i18n="nav.work">Proiecte</a>
+        <a href="#process" data-i18n="nav.process">Proces</a>
+        <a href="#contact" class="btn btn--small btn--primary" data-i18n="nav.cta">Hai să vorbim</a>
+      </nav>
+
+      <div class="nav__controls">
+        <div class="lang" role="group" aria-label="Limba" data-i18n-label="ui.language">
+          <button type="button" data-lang="ro" aria-pressed="true">RO</button>
+          <button type="button" data-lang="hu" aria-pressed="false">HU</button>
+          <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+
+        <button type="button" class="theme-toggle" aria-label="Schimbă tema" data-i18n-label="ui.theme">
+          <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        </button>
+
+        <button class="nav__toggle" aria-label="Deschide meniul" data-i18n-label="ui.menuOpen" aria-expanded="false" aria-controls="nav-menu">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="container hero__inner">
+        <div class="hero__copy reveal">
+          <h1 data-i18n="hero.title">Site-uri web, automatizări și securitate, <span class="mark">făcute cum trebuie.</span></h1>
+          <div class="hero__cta">
+            <a href="#work" class="btn btn--primary" data-i18n="hero.cta1">Vezi proiectele</a>
+            <a href="#contact" class="btn btn--ghost" data-i18n="hero.cta2">Începe un proiect</a>
+          </div>
+        </div>
+
+        <div class="hero__visual reveal">
+          <div class="stage">
+            <div class="window">
+
+              <div class="window__page" aria-hidden="true">
+
+                <!-- Development: a small site putting itself together -->
+                <div class="scene scene--dev is-active is-playing">
+                  <div class="mini">
+                    <div class="mini__hero a-rise" style="--t:.1s">
+                      <p class="mini__title">
+                        <span class="ghost" data-i18n="reel.dev.title">Afacerea ta, online.</span>
+                        <span class="typed"><span class="type" data-i18n="reel.dev.title">Afacerea ta, online.</span><span class="caret"></span></span>
+                      </p>
+                      <p class="mini__text a-fade" style="--t:1.9s" data-i18n="reel.dev.text">Rapid, curat și arată bine pe orice telefon.</p>
+                      <span class="mini__btn a-pop" style="--t:2.1s" data-click data-i18n="reel.dev.btn">Programează-te</span>
+                    </div>
+                    <div class="mini__cards">
+                      <i class="a-rise" style="--t:2.3s"></i><i class="a-rise" style="--t:2.4s"></i><i class="a-rise" style="--t:2.5s"></i>
+                    </div>
+                  </div>
+                  <svg class="cursor" viewBox="0 0 24 24"><path d="M4 2l15 9.5-6.6 1.4-3.6 6.6z"/></svg>
+                </div>
+
+                <!-- Automation: one order flowing through, no hands needed -->
+                <div class="scene scene--auto">
+                  <div class="flow">
+                    <div class="node" style="--t:.3s"><i></i><span data-i18n="reel.auto.n1">Comandă nouă</span></div>
+                    <div class="wire" style="--t:.8s"></div>
+                    <div class="node" style="--t:1.4s"><i></i><span data-i18n="reel.auto.n2">Factură</span></div>
+                    <div class="wire" style="--t:1.9s"></div>
+                    <div class="node" style="--t:2.5s"><i></i><span data-i18n="reel.auto.n3">Email client</span></div>
+                  </div>
+                  <ul class="log">
+                    <li class="a-rise" style="--t:.5s"><time>09:41:02</time><span data-i18n="reel.auto.l1">Comanda #1048 a intrat</span></li>
+                    <li class="a-rise" style="--t:1.6s"><time>09:41:03</time><span data-i18n="reel.auto.l2">Factura F-1048 generată</span></li>
+                    <li class="a-rise" style="--t:2.7s"><time>09:41:03</time><span data-i18n="reel.auto.l3">Email trimis clientului</span></li>
+                    <li class="log__done a-rise" style="--t:3.5s"><time>09:41:04</time><span data-i18n="reel.auto.l4">Gata, fără să miști un deget</span></li>
+                  </ul>
+                </div>
+
+                <!-- Security: checks resolving one by one -->
+                <div class="scene scene--sec">
+                  <div class="scan-head">
+                    <span data-i18n="reel.sec.scan">Scanez site-ul-tau.ro</span>
+                    <div class="scan-bar"><i></i></div>
+                  </div>
+                  <ul class="checks">
+                    <li style="--t:.8s"><span data-i18n="reel.sec.c1">Certificat SSL</span><span class="st"><i class="spin"></i><b class="ok">OK</b></span></li>
+                    <li style="--t:1.4s"><span data-i18n="reel.sec.c2">Headere de securitate</span><span class="st"><i class="spin"></i><b class="warn" data-i18n="reel.sec.missing">Lipsesc</b></span></li>
+                    <li style="--t:2s"><span data-i18n="reel.sec.c3">Formulare (XSS)</span><span class="st"><i class="spin"></i><b class="ok">OK</b></span></li>
+                    <li style="--t:2.6s"><span data-i18n="reel.sec.c4">Panou de admin</span><span class="st"><i class="spin"></i><b class="ok">OK</b></span></li>
+                    <li style="--t:3.2s"><span data-i18n="reel.sec.c5">Plugin-uri vechi</span><span class="st"><i class="spin"></i><b class="warn" data-i18n="reel.sec.found">2 găsite</b></span></li>
+                  </ul>
+                  <p class="report a-rise" style="--t:3.7s" data-i18n="reel.sec.report">Raport trimis: 2 probleme și cum le repari</p>
+                </div>
+
+                <!-- Weddings: the invitation itself -->
+                <div class="scene scene--wed">
+                  <div class="invite a-rise" style="--t:.1s">
+                    <small class="a-fade" style="--t:.4s" data-i18n="reel.wed.invite">Vă invităm la nunta noastră</small>
+                    <p class="invite__names">Ana &amp; Mihai</p>
+                    <p class="invite__date a-fade" style="--t:1s"><span class="wed-date">14.06.2027</span>, Deva</p>
+                    <div class="countdown">
+                      <div class="a-rise" style="--t:1.2s"><b data-cd="d">00</b><span data-i18n="reel.wed.days">zile</span></div>
+                      <div class="a-rise" style="--t:1.3s"><b data-cd="h">00</b><span data-i18n="reel.wed.hours">ore</span></div>
+                      <div class="a-rise" style="--t:1.4s"><b data-cd="m">00</b><span data-i18n="reel.wed.min">min</span></div>
+                      <div class="a-rise" style="--t:1.5s"><b data-cd="s">00</b><span data-i18n="reel.wed.sec">sec</span></div>
+                    </div>
+                    <span class="rsvp" style="--t:1.7s" data-click>
+                      <span class="rsvp__a" data-i18n="reel.wed.rsvp">Confirmă prezența</span>
+                      <span class="rsvp__b" data-i18n="reel.wed.done">Ne vedem acolo!</span>
+                    </span>
+                  </div>
+                  <svg class="cursor" viewBox="0 0 24 24"><path d="M4 2l15 9.5-6.6 1.4-3.6 6.6z"/></svg>
+                </div>
+
+                <!-- AirBnb: the guest gets the link and opens the guide -->
+                <div class="scene scene--bnb">
+                  <div class="phone a-rise" style="--t:0s">
+                    <div class="phone__screen">
+                      <div class="phone__notif"><i></i><div><b data-i18n="reel.bnb.notif">Rezervare confirmată</b><small>Apartament Cetate</small></div></div>
+                      <div class="phone__hero a-fade" style="--t:1s">
+                        <b data-i18n="reel.bnb.hello">Bine ai venit, Andrei!</b>
+                        <small data-i18n="reel.bnb.place">Apartament Cetate, Deva</small>
+                      </div>
+                      <ul class="phone__list">
+                        <li class="a-rise" style="--t:1.3s"><span data-i18n="reel.bnb.checkin">Check-in</span><b>15:00</b></li>
+                        <li class="a-rise" style="--t:1.45s"><span>Wi-Fi</span><b>CetateDeva_5G</b></li>
+                        <li class="a-rise tap" style="--t:1.6s"><span data-i18n="reel.bnb.pass">Parolă</span><b class="secret" data-click><span class="secret__a">••••••••</span><span class="secret__b">cetate2027</span></b></li>
+                        <li class="a-rise" style="--t:1.75s"><span data-i18n="reel.bnb.tip">Sfat local</span><b data-i18n="reel.bnb.tipval">Cetatea Deva, 10 min</b></li>
+                      </ul>
+                      <div class="phone__map a-fade" style="--t:1.9s"><i></i></div>
+                    </div>
+                  </div>
+                  <svg class="cursor" viewBox="0 0 24 24"><path d="M4 2l15 9.5-6.6 1.4-3.6 6.6z"/></svg>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="reel">
+              <button type="button" class="reel__tab is-active"><span>Development</span></button>
+              <button type="button" class="reel__tab"><span>Automation</span></button>
+              <button type="button" class="reel__tab"><span>Security</span></button>
+              <button type="button" class="reel__tab"><span>Weddings</span></button>
+              <button type="button" class="reel__tab"><span>AirBnb</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="about">
+          <figure class="founder reveal">
+            <picture>
+              <source srcset="assets/lorand.webp" type="image/webp">
+              <img src="assets/lorand.jpg" alt="Lorand Sarkozi" width="880" height="1100" loading="lazy">
+            </picture>
+            <figcaption class="founder__tag glass">
+              <b data-i18n="about.name">Lorand Sarkozi</b>
+              <span data-i18n="about.role">Fondator, R3w Development</span>
+            </figcaption>
+          </figure>
+
+          <div class="about__intro reveal">
+            <p class="section__label" data-i18n="about.label">Despre mine</p>
+            <h2 data-i18n="about.title">Omul din spatele R3w.</h2>
+            <p class="mission" data-i18n="about.mission">
+              Am pornit R3w Development ca să fac viața oamenilor mai ușoară, să ajut și să modernizez cât de mult se poate.
+            </p>
+            <p data-i18n="about.p1">
+              Salut, sunt <strong>Lorand</strong>. Lucrez direct cu fiecare client, fără intermediari: vorbești cu omul
+              care scrie codul.
+            </p>
+            <p data-i18n="about.p2">
+              În paralel lucrez ca Full-Stack Engineer și fac un master în securitate cibernetică, așa că fiecare
+              proiect R3w vine cu experiență reală din industrie și cu securitatea gândită de la început.
+            </p>
+
+            <ol class="timeline glass">
+              <li>
+                <span class="timeline__when" data-i18n="about.job.when">Din august 2026</span>
+                <div>
+                  <h3>Junior Full-Stack Engineer <em class="now" data-i18n="about.now">Acum</em></h3>
+                  <p>Codexworks Technologies</p>
+                </div>
+              </li>
+              <li>
+                <span class="timeline__when">2025-2027</span>
+                <div>
+                  <h3><span data-i18n="about.msc.title">Master în Cybersecurity Engineering</span> <em class="now" data-i18n="about.now">Acum</em></h3>
+                  <p data-i18n="about.msc.text">Universitatea Tehnică din Cluj-Napoca, anul II</p>
+                </div>
+              </li>
+              <li>
+                <span class="timeline__when">2021-2025</span>
+                <div>
+                  <h3 data-i18n="about.bsc.title">Licență în Calculatoare</h3>
+                  <p data-i18n="about.bsc.text">Universitatea Tehnică din Cluj-Napoca, specializarea Inteligență Artificială</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SOLUTIONS ============ -->
+    <section class="section" id="solutions">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="section__label" data-i18n="solutions.label">Servicii</p>
+          <h2 data-i18n="solutions.title">Tot ce are nevoie afacerea ta online</h2>
+          <p data-i18n="solutions.sub">Trei servicii de bază și două produse speciale, făcute pentru momente anume.</p>
+        </header>
+
+        <div class="cards cards--3">
+          <article class="card glass reveal">
+            <h3 class="with-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg><span>R3w <span>Development</span></span></h3>
+            <p data-i18n="dev.text">Site-uri de la o simplă pagină de prezentare până la aplicații web complexe, gândite și scrise de la zero.</p>
+            <ul class="card__list">
+              <li data-i18n="dev.l1">Site-uri de prezentare pentru firme</li>
+              <li data-i18n="dev.l2">Aplicații web, dashboard-uri și portaluri</li>
+              <li data-i18n="dev.l3">Responsive, optimizate SEO, rapide</li>
+            </ul>
+            <div class="card__more"><a class="btn-neon" href="development/"><span data-i18n="svc.details">Detalii</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          </article>
+
+          <article class="card glass reveal">
+            <h3 class="with-icon"><svg class="icon icon--line" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg><span>R3w <span>Automation</span></span></h3>
+            <p data-i18n="auto.text">Aplicații mici și scripturi care preiau munca repetitivă, ca tu să te ocupi de ce contează.</p>
+            <ul class="card__list">
+              <li data-i18n="auto.l1">Sarcini recurente pe pilot automat</li>
+              <li data-i18n="auto.l2">Rapoarte, emailuri și sincronizare de date</li>
+              <li data-i18n="auto.l3">Unelte făcute pe fluxul tău de lucru</li>
+            </ul>
+            <div class="card__more"><a class="btn-neon" href="automation/"><span data-i18n="svc.details">Detalii</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          </article>
+
+          <article class="card glass reveal">
+            <h3 class="with-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg><span>R3w <span>Security</span></span></h3>
+            <p data-i18n="sec.text">Verific site-ul tău de vulnerabilități și îți trimit un raport clar: ce e în neregulă și cum se repară.</p>
+            <ul class="card__list">
+              <li data-i18n="sec.l1">Analiză de vulnerabilități</li>
+              <li data-i18n="sec.l2">Raport pe înțelesul tuturor</li>
+              <li data-i18n="sec.l3">Recomandări de remediere, în ordinea priorității</li>
+            </ul>
+            <div class="card__more"><a class="btn-neon" href="security/"><span data-i18n="svc.details">Detalii</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          </article>
+        </div>
+
+        <p class="subhead reveal" data-i18n="solutions.special">Produse speciale</p>
+
+        <div class="cards cards--2">
+          <article class="card glass reveal">
+            <h3 class="with-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg><span>R3w <span>Weddings</span></span></h3>
+            <p data-i18n="wed.text">
+              Un site personal în loc de invitația clasică. Povestea voastră, programul zilei, harta locației și
+              confirmările de participare, toate într-un singur link.
+            </p>
+            <ul class="card__list card__list--inline">
+              <li data-i18n="wed.l1">Invitație digitală</li>
+              <li data-i18n="wed.l2">Confirmare (RSVP)</li>
+              <li data-i18n="wed.l3">Program și hartă</li>
+              <li data-i18n="wed.l4">Galerie foto</li>
+            </ul>
+            <div class="card__more"><a class="btn-neon" href="weddings/"><span data-i18n="svc.details">Detalii</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          </article>
+
+          <article class="card glass reveal">
+            <h3 class="with-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-9.5Z"/></svg><span>R3w <span>AirBnb</span></span></h3>
+            <p data-i18n="bnb.text">
+              Un ghid privat, nelistat, pentru oaspeții tăi. Când cineva rezervă, îi trimiți un singur link cu tot
+              ce trebuie să știe, plus recomandările tale locale.
+            </p>
+            <ol class="steps">
+              <li><b>1</b><span data-i18n="bnb.s1">Un oaspete îți rezervă locuința</span></li>
+              <li><b>2</b><span data-i18n="bnb.s2">Îi trimiți linkul lui privat</span></li>
+              <li><b>3</b><span data-i18n="bnb.s3">Check-in, Wi-Fi, regulile casei și recomandări, toate într-un loc</span></li>
+            </ol>
+            <div class="card__more"><a class="btn-neon" href="airbnb/"><span data-i18n="svc.details">Detalii</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WORK ============ -->
+    <section class="section" id="work">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="section__label" data-i18n="work.label">Portofoliu</p>
+          <h2 data-i18n="work.title">Proiecte alese</h2>
+          <p data-i18n="work.sub">Proiecte reale pentru afaceri reale.</p>
+        </header>
+
+        <div class="carousel reveal">
+          <button type="button" class="round-btn carousel__btn carousel__btn--prev" data-scroll="-1" aria-label="Înapoi" data-i18n-label="ui.prev"><svg viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></svg></button>
+          <div class="projects" id="projects">
+
+          <article class="project glass">
+            <div class="browser">
+              <div class="browser__bar">
+                <span class="browser__dots"><i></i><i></i><i></i></span>
+                <a class="browser__url" href="https://prestigedetailing.ro/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span class="browser__addr">prestigedetailing.ro</span></a>
+                <span class="browser__live"><i></i><span data-i18n="work.live">Online</span></span>
+              </div>
+              <div class="shots">
+                <div class="shots__track">
+                  <img src="assets/projects/prestige-1.jpg" data-path="" alt="Prestige Detailing Deva, prima pagină" width="1200" height="750" loading="lazy">
+                  <img src="assets/projects/prestige-2.jpg" data-path="#gallery" alt="Prestige Detailing Deva, galeria foto" width="1200" height="750" loading="lazy">
+                  <img src="assets/projects/prestige-3.jpg" data-path="#reviews" alt="Prestige Detailing Deva, recenziile Google" width="1200" height="750" loading="lazy">
+                </div>
+                <button type="button" class="shots__btn shots__btn--prev" aria-label="Imaginea anterioară" data-i18n-label="ui.prevImage"><svg viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></svg></button>
+                <button type="button" class="shots__btn shots__btn--next" aria-label="Imaginea următoare" data-i18n-label="ui.nextImage"><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></button>
+                <div class="shots__dots"></div>
+              </div>
+            </div>
+            <div class="project__body">
+              <div class="tags"><span data-i18n="work.tag.business">Site de afacere</span><span data-i18n="work.tag.gallery">Galerie foto</span><span data-i18n="work.tag.reviews">Recenzii Google</span></div>
+              <h3>Prestige Detailing Deva</h3>
+              <p data-i18n="work.detailing">Site pentru un service auto și atelier de detailing premium din Deva: servicii, galerie foto, recenzii Google și programări.</p>
+              <!-- Replace with the client's own words -->
+              <blockquote class="quote">
+                <p data-i18n="work.detailing.quote">„Aici vine recomandarea clientului, în cuvintele lui.”</p>
+                <footer>Prestige Detailing Deva</footer>
+              </blockquote>
+              <a href="https://prestigedetailing.ro/" class="link" target="_blank" rel="noopener"><span data-i18n="work.visit">Vezi site-ul</span> <span class="arrow" aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <article class="project glass">
+            <div class="browser">
+              <div class="browser__bar">
+                <span class="browser__dots"><i></i><i></i><i></i></span>
+                <a class="browser__url" href="https://ppbarberstudio.ro/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span class="browser__addr">ppbarberstudio.ro</span></a>
+                <span class="browser__live"><i></i><span data-i18n="work.live">Online</span></span>
+              </div>
+              <div class="shots">
+                <div class="shots__track">
+                  <img src="assets/projects/barber-1.jpg" data-path="" alt="PP Barberstudio, prima pagină" width="1200" height="750" loading="lazy">
+                  <img src="assets/projects/barber-2.jpg" data-path="#stiluri" alt="PP Barberstudio, galeria cu tunsori" width="1200" height="750" loading="lazy">
+                  <img src="assets/projects/barber-3.jpg" data-path="#despre" alt="PP Barberstudio, despre fondator" width="1200" height="750" loading="lazy">
+                </div>
+                <button type="button" class="shots__btn shots__btn--prev" aria-label="Imaginea anterioară" data-i18n-label="ui.prevImage"><svg viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></svg></button>
+                <button type="button" class="shots__btn shots__btn--next" aria-label="Imaginea următoare" data-i18n-label="ui.nextImage"><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></button>
+                <div class="shots__dots"></div>
+              </div>
+            </div>
+            <div class="project__body">
+              <div class="tags"><span data-i18n="work.tag.showcase">Site de prezentare</span><span data-i18n="work.tag.gallery">Galerie foto</span><span data-i18n="work.tag.booking">Programări online</span></div>
+              <h3>PP Barberstudio</h3>
+              <p data-i18n="work.barber">Site pentru un barbershop premium din Deva: galerie cu tunsori, prețuri, povestea fondatorului și programări online.</p>
+              <!-- Replace with the client's own words -->
+              <blockquote class="quote">
+                <p data-i18n="work.barber.quote">„Aici vine recomandarea clientului, în cuvintele lui.”</p>
+                <footer>PP Barberstudio</footer>
+              </blockquote>
+              <a href="https://ppbarberstudio.ro/" class="link" target="_blank" rel="noopener"><span data-i18n="work.visit">Vezi site-ul</span> <span class="arrow" aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <article class="project project--next">
+            <div class="project__next">
+              <h3 data-i18n="work.next.title">Proiectul tău aici</h3>
+              <p data-i18n="work.next.text">Ai o idee? Hai s-o facem următorul proiect de pe pagina asta.</p>
+              <a href="#contact" class="btn btn--primary btn--small" data-i18n="hero.cta2">Începe un proiect</a>
+            </div>
+          </article>
+          </div>
+          <button type="button" class="round-btn carousel__btn carousel__btn--next" data-scroll="1" aria-label="Înainte" data-i18n-label="ui.next"><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROCESS ============ -->
+    <section class="section" id="process">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="section__label" data-i18n="process.label">Proces</p>
+          <h2 data-i18n="process.title">De la primul mesaj până la lansare</h2>
+        </header>
+
+        <ol class="process">
+          <li class="glass reveal">
+            <span class="process__num">01</span>
+            <h3 data-i18n="process.s1.title">Discutăm</h3>
+            <p data-i18n="process.s1.text">Vorbim despre obiectivele tale, despre clienții tăi și despre ce înseamnă succes pentru tine.</p>
+          </li>
+          <li class="glass reveal">
+            <span class="process__num">02</span>
+            <h3 data-i18n="process.s2.title">Design</h3>
+            <p data-i18n="process.s2.text">Planific structura și aspectul, iar tu aprobi înainte să scriu vreo linie de cod.</p>
+          </li>
+          <li class="glass reveal">
+            <span class="process__num">03</span>
+            <h3 data-i18n="process.s3.title">Dezvoltare</h3>
+            <p data-i18n="process.s3.text">Cod curat și testat, cu previzualizări regulate, ca să vezi mereu cum avansează.</p>
+          </li>
+          <li class="glass reveal">
+            <span class="process__num">04</span>
+            <h3 data-i18n="process.s4.title">Lansare și suport</h3>
+            <p data-i18n="process.s4.text">Îl pun online, verific să fie sigur și rămân alături pentru actualizări și reparații.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section" id="contact">
+      <div class="container contact reveal">
+        <div class="contact__copy">
+          <p class="section__label" data-i18n="contact.label">Contact</p>
+          <h2 data-i18n="contact.title">Hai să construim ceva <span class="mark">frumos.</span></h2>
+          <p data-i18n="contact.text">Spune-mi câteva lucruri despre proiectul tău și îți răspund în 24 de ore.</p>
+          <ul class="contact__list">
+            <li>
+              <span data-i18n="contact.emailLabel">Email</span>
+              <a href="mailto:lorand.sarkozi25@yahoo.com">lorand.sarkozi25@yahoo.com</a>
+            </li>
+            <li>
+              <span data-i18n="contact.phoneLabel">Telefon</span>
+              <a href="tel:+40727515052">+40 727 515 052</a>
+            </li>
+            <li>
+              <span>WhatsApp</span>
+              <a href="https://wa.me/40727515052" target="_blank" rel="noopener" data-i18n="contact.whatsapp">Scrie-mi pe WhatsApp</a>
+            </li>
+          </ul>
+        </div>
+
+        <form class="form glass" id="contact-form">
+          <div class="form__row">
+            <label class="field">
+              <input type="text" name="name" placeholder=" " required autocomplete="name">
+              <span data-i18n="form.name">Nume</span>
+            </label>
+            <label class="field">
+              <input type="email" name="email" placeholder=" " required autocomplete="email">
+              <span data-i18n="form.email">Email</span>
+            </label>
+          </div>
+
+          <div class="choice" role="radiogroup" aria-labelledby="service-label">
+            <p class="choice__label" id="service-label" data-i18n="form.service">De ce ai nevoie?</p>
+            <div class="pills">
+              <label class="pill"><input type="radio" name="service" value="R3w Development" checked><span>Development</span></label>
+              <label class="pill"><input type="radio" name="service" value="R3w Automation"><span>Automation</span></label>
+              <label class="pill"><input type="radio" name="service" value="R3w Security"><span>Security</span></label>
+              <label class="pill"><input type="radio" name="service" value="R3w Weddings"><span>Weddings</span></label>
+              <label class="pill"><input type="radio" name="service" value="R3w AirBnb"><span>AirBnb</span></label>
+              <label class="pill"><input type="radio" name="service" value=""><span data-i18n="form.opt.other">Altceva</span></label>
+            </div>
+          </div>
+
+          <label class="field">
+            <textarea name="message" rows="3" placeholder=" " required></textarea>
+            <span data-i18n="form.message">Mesaj</span>
+          </label>
+
+          <button type="submit" class="btn btn--primary" data-i18n="form.send">Trimite mesajul</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a href="#top" class="logo" aria-label="R3w Development">
+        <svg class="wordmark" viewBox="-5 -5 107 46" width="79" height="34" aria-hidden="true">
+          <defs><filter id="neon-foot" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.4"/></filter></defs>
+          <path fill="currentColor" fill-rule="evenodd" d="M0 0H15A10.5 10.5 0 0 1 15 21H7V36H0Z M7 7H15A3.5 3.5 0 0 1 15 14H7Z"/>
+          <path fill="currentColor" d="M12.5 24H20L29.5 36H22Z"/>
+          <g class="neon" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path class="neon__glow" stroke-width="6" filter="url(#neon-foot)" d="M39.5 2.5H48.5A7.25 7.25 0 0 1 48.5 17H44M44 17H49.5A8.25 8.25 0 0 1 49.5 33.5H39.5"/>
+            <path class="neon__outline" stroke-width="6.6" d="M39.5 2.5H48.5A7.25 7.25 0 0 1 48.5 17H44M44 17H49.5A8.25 8.25 0 0 1 49.5 33.5H39.5"/>
+            <path class="neon__tube" stroke-width="5" d="M39.5 2.5H48.5A7.25 7.25 0 0 1 48.5 17H44M44 17H49.5A8.25 8.25 0 0 1 49.5 33.5H39.5"/>
+            <path class="neon__core" stroke-width="1.4" d="M39.5 2.5H48.5A7.25 7.25 0 0 1 48.5 17H44M44 17H49.5A8.25 8.25 0 0 1 49.5 33.5H39.5"/>
+          </g>
+          <path fill="none" stroke="currentColor" stroke-width="7" d="M70.5 10V27.25A5.75 5.75 0 0 0 82 27.25V18M82 27.25A5.75 5.75 0 0 0 93.5 27.25V10"/>
+        </svg>
+      </a>
+      <p>© <span id="year"></span> R3w Development. <span data-i18n="footer.rights">Toate drepturile rezervate.</span></p>
+    </div>
+  </footer>
+
+  <script src="js/translations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

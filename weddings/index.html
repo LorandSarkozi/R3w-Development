@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>R3w Weddings | Invitația de nuntă, ca un site</title>
+  <meta name="description" content="Un site doar al vostru în locul invitației clasice: povestea, programul, locația și confirmările invitaților într-un singur link. Explicat cu animații.">
+  <meta name="theme-color" content="#040A18">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/service.css">
+  <link rel="stylesheet" href="page.css">
+  <script>
+    // Set the theme before the page paints, so there is no flash of the wrong colours
+    (function () {
+      var root = document.documentElement, saved;
+      root.classList.add('js');
+      try { saved = localStorage.getItem('theme'); } catch (e) {}
+      root.dataset.theme = saved || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    })();
+  </script>
+</head>
+<body>
+
+  <div class="backdrop" aria-hidden="true">
+    <div class="orb orb--sapphire"></div>
+    <div class="orb orb--ocean"></div>
+    <div class="orb orb--jade"></div>
+  </div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="top">
+    <div class="container nav__inner">
+      <a href="../" class="logo" aria-label="R3w Development">
+        <svg class="wordmark" viewBox="-5 -5 107 46" width="79" height="34" aria-hidden="true">
+          <defs><filter id="neon-nav" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.4"/></filter></defs>
+          <path fill="currentColor" fill-rule="evenodd" d="M0 0H15A10.5 10.5 0 0 1 15 21H7V36H0Z M7 7H15A3.5 3.5 0 0 1 15 14H7Z"/>
+          <path fill="currentColor" d="M12.5 24H20L29.5 36H22Z"/>
+          <g class="neon" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path class="neon__glow" stroke-width="6" filter="url(#neon-nav)" d="M39.5 2.5H48.5A7.25 7.25 0 0 1 48.5 17H44M44 17H49.5A8.25 8.25 0 0 1 49.5 33.5H39.5"/>
+            <path class="neon__outline" stroke-width="6.6" d="M39.5 2.5H48.5A7.25 7.25 0 0 1 48.5 17H44M44 17H49.5A8.25 8.25 0 0 1 49.5 33.5H39.5"/>
+            <path class="neon__tube" stroke-width="5" d="M39.5 2.5H48.5A7.25 7.25 0 0 1 48.5 17H44M44 17H49.5A8.25 8.25 0 0 1 49.5 33.5H39.5"/>
+            <path class="neon__core" stroke-width="1.4" d="M39.5 2.5H48.5A7.25 7.25 0 0 1 48.5 17H44M44 17H49.5A8.25 8.25 0 0 1 49.5 33.5H39.5"/>
+          </g>
+          <path fill="none" stroke="currentColor" stroke-width="7" d="M70.5 10V27.25A5.75 5.75 0 0 0 82 27.25V18M82 27.25A5.75 5.75 0 0 0 93.5 27.25V10"/>
+        </svg>
+      </a>
+
+      <nav class="nav__menu" id="nav-menu">
+        <a href="../#about" data-i18n="nav.about">Despre</a>
+        <a href="../#solutions" data-i18n="nav.solutions">Servicii</a>
+        <a href="../#work" data-i18n="nav.work">Proiecte</a>
+        <a href="../#process" data-i18n="nav.process">Proces</a>
+        <a href="../#contact" class="btn btn--small btn--primary" data-i18n="nav.cta">Hai să vorbim</a>
+      </nav>
+
+      <div class="nav__controls">
+        <div class="lang" role="group" aria-label="Limba" data-i18n-label="ui.language">
+          <button type="button" data-lang="ro" aria-pressed="true">RO</button>
+          <button type="button" data-lang="hu" aria-pressed="false">HU</button>
+          <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+
+        <button type="button" class="theme-toggle" aria-label="Schimbă tema" data-i18n-label="ui.theme">
+          <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        </button>
+
+        <button class="nav__toggle" aria-label="Deschide meniul" data-i18n-label="ui.menuOpen" aria-expanded="false" aria-controls="nav-menu">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <section class="svc-hero">
+      <div class="container svc-hero__inner">
+        <div class="reveal">
+          <a class="back" href="../#solutions"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span data-i18n="svc.back">Toate serviciile</span></a>
+          <p class="section__label">R3w Weddings</p>
+          <h1 data-i18n="page.hero.title">Invitația voastră, <span class="mark">ca un site.</span></h1>
+          <p class="svc-lead" data-i18n="page.hero.lead">Un site doar al vostru, în locul invitației clasice. Povestea, programul zilei, locația și confirmările invitaților, toate într-un singur link pe care îl trimiteți pe WhatsApp.</p>
+          <div class="hero__cta">
+            <a href="../#contact" class="btn btn--primary" data-i18n="svc.quote">Cere o ofertă</a>
+            <a href="#contine" class="btn btn--ghost" data-i18n="page.hero.cta2">Vezi ce conține</a>
+          </div>
+        </div>
+
+        <!-- An envelope that opens and lets the invitation out -->
+        <div class="envelope reveal" data-animate aria-hidden="true">
+          <div class="envelope__body">
+            <div class="envelope__back"></div>
+            <div class="envelope__card">
+              <small data-i18n="reel.wed.invite">Vă invităm la nunta noastră</small>
+              <p class="envelope__names">Ana &amp; Mihai</p>
+              <p class="envelope__date"><span class="wed-date">14.06.2027</span>, Deva</p>
+              <div class="countdown-w">
+                <div><b data-cd="d">00</b><span data-i18n="reel.wed.days">zile</span></div>
+                <div><b data-cd="h">00</b><span data-i18n="reel.wed.hours">ore</span></div>
+                <div><b data-cd="m">00</b><span data-i18n="reel.wed.min">min</span></div>
+                <div><b data-cd="s">00</b><span data-i18n="reel.wed.sec">sec</span></div>
+              </div>
+            </div>
+            <div class="envelope__front"></div>
+            <div class="envelope__flap"></div>
+            <span class="envelope__seal">A&amp;M</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WHAT'S INSIDE ============ -->
+    <section class="section" id="contine">
+      <div class="container">
+        <header class="svc-intro reveal">
+          <p class="section__label" data-i18n="page.has.label">Ce conține</p>
+          <h2 data-i18n="page.has.title">Tot ce trebuie să știe invitații, într-un singur loc</h2>
+          <p data-i18n="page.has.p1">Fiecare site e făcut pentru nunta voastră, dar de obicei are secțiunile de mai jos. Le păstrați doar pe cele care vi se potrivesc.</p>
+        </header>
+
+        <div class="wgrid">
+          <!-- Story -->
+          <article class="wcard glass reveal" data-animate>
+            <div class="wcard__vis wv-story">
+              <span style="--i:0"><i></i>2019</span>
+              <span style="--i:1"><i></i>2023</span>
+              <span style="--i:2"><i></i>2027</span>
+            </div>
+            <h3 class="with-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg><span data-i18n="page.has.c1">Povestea voastră</span></h3>
+            <p data-i18n="page.has.c1t">Cum v-ați cunoscut, primele amintiri, cererea în căsătorie.</p>
+          </article>
+
+          <!-- Schedule -->
+          <article class="wcard glass reveal" data-animate>
+            <div class="wcard__vis wv-schedule">
+              <span style="--i:0"><b>15:00</b><em data-i18n="page.has.v2a">Cununia civilă</em></span>
+              <span style="--i:1"><b>17:00</b><em data-i18n="page.has.v2b">Biserica</em></span>
+              <span style="--i:2"><b>19:00</b><em data-i18n="page.has.v2c">Petrecerea</em></span>
+            </div>
+            <h3 class="with-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><span data-i18n="page.has.c2">Programul zilei</span></h3>
+            <p data-i18n="page.has.c2t">Ora și locul pentru cununie, biserică și petrecere.</p>
+          </article>
+
+          <!-- Map -->
+          <article class="wcard glass reveal" data-animate>
+            <div class="wcard__vis wv-map">
+              <svg viewBox="0 0 200 90" preserveAspectRatio="none"><path class="wv-route" d="M14 74 C 60 74, 60 30, 104 34 S 160 20, 176 22"/></svg>
+              <i class="wv-pin"></i>
+            </div>
+            <h3 class="with-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg><span data-i18n="page.has.c3">Locația și harta</span></h3>
+            <p data-i18n="page.has.c3t">Hartă interactivă și indicații, ca nimeni să nu se rătăcească.</p>
+          </article>
+
+          <!-- RSVP -->
+          <article class="wcard glass reveal" data-animate>
+            <div class="wcard__vis wv-rsvp">
+              <span class="wv-chip wv-chip--on" data-i18n="page.has.v4a">Particip</span>
+              <span class="wv-chip" data-i18n="page.has.v4b">Meniu vegetarian</span>
+              <span class="wv-chip wv-chip--soft">2 &times;</span>
+            </div>
+            <h3 class="with-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="m8 12 3 3 5-6"/></svg><span data-i18n="page.has.c4">Confirmare (RSVP)</span></h3>
+            <p data-i18n="page.has.c4t">Invitații confirmă, aleg meniul și spun câte persoane vin.</p>
+          </article>
+
+          <!-- Accommodation -->
+          <article class="wcard glass reveal" data-animate>
+            <div class="wcard__vis wv-stay">
+              <span style="--i:0"><i></i><em data-i18n="page.has.v5a">Hotel, 5 minute</em></span>
+              <span style="--i:1"><i></i><em data-i18n="page.has.v5b">Pensiune, 10 minute</em></span>
+            </div>
+            <h3 class="with-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 19V6M3 14h18v5M21 14a4 4 0 0 0-4-4h-6v4"/><circle cx="7" cy="11" r="2"/></svg><span data-i18n="page.has.c5">Cazare</span></h3>
+            <p data-i18n="page.has.c5t">Hoteluri și pensiuni din apropiere, pentru cei care vin de departe.</p>
+          </article>
+
+          <!-- Gallery -->
+          <article class="wcard glass reveal" data-animate>
+            <div class="wcard__vis wv-gallery"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i></div>
+            <h3 class="with-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/></svg><span data-i18n="page.has.c6">Galerie foto</span></h3>
+            <p data-i18n="page.has.c6t">Pozele voastre acum, iar după nuntă, pozele de la petrecere.</p>
+          </article>
+
+          <!-- Countdown -->
+          <article class="wcard glass reveal" data-animate>
+            <div class="wcard__vis wv-count">
+              <span><b data-cd="d">00</b><em data-i18n="reel.wed.days">zile</em></span>
+              <span><b data-cd="h">00</b><em data-i18n="reel.wed.hours">ore</em></span>
+              <span><b data-cd="m">00</b><em data-i18n="reel.wed.min">min</em></span>
+              <span><b data-cd="s">00</b><em data-i18n="reel.wed.sec">sec</em></span>
+            </div>
+            <h3 class="with-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h12M6 22h12M7 2c0 5 5 6 5 10s-5 5-5 10M17 2c0 5-5 6-5 10s5 5 5 10"/></svg><span data-i18n="page.has.c7">Numărătoare inversă</span></h3>
+            <p data-i18n="page.has.c7t">Zilele, orele și minutele rămase până la marele eveniment.</p>
+          </article>
+
+          <!-- Dress code -->
+          <article class="wcard glass reveal" data-animate>
+            <div class="wcard__vis wv-dress">
+              <i style="--c:#E9D7C8;--i:0"></i><i style="--c:#B9C9B3;--i:1"></i><i style="--c:#C9D6EA;--i:2"></i><i style="--c:#EAC9CF;--i:3"></i>
+              <em data-i18n="page.has.v8">Elegant, nuanțe pastel</em>
+            </div>
+            <h3 class="with-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3 4 6l2 4 2-1v12h8V9l2 1 2-4-4-3c0 2-1.8 3-4 3S8 5 8 3Z"/></svg><span data-i18n="page.has.c8">Dress code</span></h3>
+            <p data-i18n="page.has.c8t">Culorile și ținuta pe care le doriți, explicate frumos.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW IT WORKS FOR GUESTS ============ -->
+    <section class="section" id="cum">
+      <div class="container">
+        <header class="svc-intro reveal">
+          <p class="section__label" data-i18n="page.how.label">Pentru invitați</p>
+          <h2 data-i18n="page.how.title">Cum funcționează</h2>
+          <p data-i18n="page.how.p1">Invitații nu instalează nimic. Primesc un link, îl deschid pe telefon și confirmă în câteva secunde. Voi vedeți totul pe loc.</p>
+        </header>
+
+        <div class="flow-line reveal" data-animate style="--n:4">
+          <div class="flow-step" style="--i:0">
+            <span class="flow-step__icon"><svg viewBox="0 0 24 24"><path d="M21 3 3 10l7 3 3 7 8-17Z"/><path d="m10 13 4-4"/></svg></span>
+            <b data-i18n="page.how.f1">Trimiteți linkul</b>
+            <small data-i18n="page.how.f1s">pe WhatsApp, Facebook sau email</small>
+          </div>
+          <div class="flow-step" style="--i:1">
+            <span class="flow-step__icon"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span>
+            <b data-i18n="page.how.f2">Invitații îl deschid</b>
+            <small data-i18n="page.how.f2s">pe orice telefon</small>
+          </div>
+          <div class="flow-step" style="--i:2">
+            <span class="flow-step__icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></span>
+            <b data-i18n="page.how.f3">Confirmă</b>
+            <small data-i18n="page.how.f3s">în câteva secunde</small>
+          </div>
+          <div class="flow-step" style="--i:3">
+            <span class="flow-step__icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7"/><path d="M18 14.5a6.5 6.5 0 0 1 3.5 5.5"/></svg></span>
+            <b data-i18n="page.how.f4">Voi vedeți lista</b>
+            <small data-i18n="page.how.f4s">în timp real</small>
+          </div>
+        </div>
+
+        <!-- What the couple sees: the guest list filling up -->
+        <div class="guests glass reveal" data-animate aria-hidden="true">
+          <div class="guests__head">
+            <h3 data-i18n="page.how.list">Lista invitaților</h3>
+            <span class="guests__demo" data-i18n="page.how.demo">Date demonstrative</span>
+          </div>
+          <div class="guests__progress">
+            <div><b><span data-count="95">95</span> / 120</b><span data-i18n="page.how.answered">au răspuns</span></div>
+            <div class="guests__bar"><i></i></div>
+          </div>
+          <div class="guests__tiles">
+            <div><b data-count="86">86</b><span data-i18n="page.how.t1">Participă</span></div>
+            <div><b data-count="9">9</b><span data-i18n="page.how.t2">Nu pot veni</span></div>
+            <div><b data-count="7">7</b><span data-i18n="page.how.t3">Meniu vegetarian</span></div>
+            <div><b data-count="12">12</b><span data-i18n="page.how.t4">Copii</span></div>
+          </div>
+          <ul class="guests__list">
+            <li style="--i:0"><b>Andrei și Ioana</b><span data-i18n="page.how.p2">2 persoane</span><em class="is-yes" data-i18n="page.how.yes">Participă</em></li>
+            <li style="--i:1"><b>Familia Kovács</b><span data-i18n="page.how.p4">4 persoane</span><em class="is-yes" data-i18n="page.how.yes">Participă</em></li>
+            <li style="--i:2"><b>Mara Pop</b><span data-i18n="page.how.p1x">1 persoană</span><em class="is-no" data-i18n="page.how.no">Nu poate</em></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TRY IT ============ -->
+    <section class="section" id="demo">
+      <div class="container split">
+        <div class="reveal">
+          <p class="section__label" data-i18n="page.demo.label">Încercați</p>
+          <h2 data-i18n="page.demo.title">Așa confirmă un invitat</h2>
+          <p data-i18n="page.demo.p1">Apăsați pe butoanele din telefonul de alături. Exact așa răspund invitații voștri, iar răspunsul ajunge imediat în lista voastră.</p>
+          <p class="demo-note" data-i18n="page.demo.note">E doar o demonstrație, nu se trimite nimic.</p>
+        </div>
+
+        <div class="rsvp-demo reveal">
+          <div class="rsvp-phone">
+            <div class="rsvp-phone__screen">
+              <p class="rsvp-phone__names">Ana &amp; Mihai</p>
+              <p class="rsvp-phone__date"><span class="wed-date">14.06.2027</span>, Deva</p>
+
+              <div class="rsvp-card" data-step="ask">
+                <!-- step 1: coming or not -->
+                <div class="rsvp-step rsvp-step--ask">
+                  <p class="rsvp-q" data-i18n="page.demo.q">Veniți la nunta noastră?</p>
+                  <div class="rsvp-row">
+                    <button type="button" class="rsvp-btn rsvp-btn--yes" data-answer="yes" data-i18n="page.demo.yes">Particip</button>
+                    <button type="button" class="rsvp-btn" data-answer="no" data-i18n="page.demo.no">Nu pot</button>
+                  </div>
+                </div>
+                <!-- step 2: menu and people -->
+                <div class="rsvp-step rsvp-step--details">
+                  <p class="rsvp-q" data-i18n="page.demo.menuq">Ce meniu preferați?</p>
+                  <div class="rsvp-row">
+                    <button type="button" class="rsvp-chip is-picked" data-menu="classic" data-i18n="page.demo.m1">Clasic</button>
+                    <button type="button" class="rsvp-chip" data-menu="veg" data-i18n="page.demo.m2">Vegetarian</button>
+                  </div>
+                  <p class="rsvp-q rsvp-q--small" data-i18n="page.demo.people">Câte persoane?</p>
+                  <div class="rsvp-stepper">
+                    <button type="button" data-people="-1" aria-label="-"><svg viewBox="0 0 24 24"><path d="M6 12h12"/></svg></button>
+                    <b class="rsvp-count">2</b>
+                    <button type="button" data-people="1" aria-label="+"><svg viewBox="0 0 24 24"><path d="M12 6v12M6 12h12"/></svg></button>
+                  </div>
+                  <button type="button" class="rsvp-btn rsvp-btn--yes rsvp-send" data-i18n="page.demo.send">Trimite răspunsul</button>
+                </div>
+                <!-- step 3: done -->
+                <div class="rsvp-step rsvp-step--done">
+                  <span class="rsvp-done-icon"><svg viewBox="0 0 24 24"><path d="m6 12 4 4 8-8"/></svg></span>
+                  <p class="rsvp-thanks rsvp-thanks--yes" data-i18n="page.demo.thanks">Mulțumim! Răspunsul a ajuns la miri.</p>
+                  <p class="rsvp-thanks rsvp-thanks--no" data-i18n="page.demo.sorry">Păcat că nu puteți veni. Mulțumim că ne-ați anunțat.</p>
+                  <button type="button" class="rsvp-change" data-i18n="page.demo.change">Schimbă răspunsul</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- the couple's side, updating live -->
+          <div class="rsvp-live glass">
+            <p class="rsvp-live__title"><i></i><span data-i18n="page.demo.live">Lista mirilor, live</span></p>
+            <div class="rsvp-live__row"><span data-i18n="page.how.t1">Participă</span><b data-live="yes">86</b></div>
+            <div class="rsvp-live__row"><span data-i18n="page.how.t2">Nu pot veni</span><b data-live="no">9</b></div>
+            <div class="rsvp-live__row"><span data-i18n="page.how.t3">Meniu vegetarian</span><b data-live="veg">7</b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PAPER OR SITE ============ -->
+    <section class="section">
+      <div class="container">
+        <header class="svc-intro reveal">
+          <p class="section__label" data-i18n="page.vs.label">Hârtie sau site?</p>
+          <h2 data-i18n="page.vs.title">Ce adaugă un site față de invitația tipărită</h2>
+        </header>
+
+        <div class="vs glass reveal" data-animate>
+          <div class="vs__row vs__row--head">
+            <span></span>
+            <span data-i18n="page.vs.paper">Invitație tipărită</span>
+            <span data-i18n="page.vs.site">Site de nuntă</span>
+          </div>
+          <div class="vs__row" style="--i:0">
+            <b data-i18n="page.vs.r1">Schimbați detaliile oricând</b>
+            <span class="vs__no" data-i18n="page.vs.r1p">Nu, e deja tipărită</span>
+            <span class="vs__yes" data-i18n="page.vs.r1s">Da, în câteva minute</span>
+          </div>
+          <div class="vs__row" style="--i:1">
+            <b data-i18n="page.vs.r2">Confirmările invitaților</b>
+            <span class="vs__no" data-i18n="page.vs.r2p">Le adunați la telefon</span>
+            <span class="vs__yes" data-i18n="page.vs.r2s">Vin singure, într-o listă</span>
+          </div>
+          <div class="vs__row" style="--i:2">
+            <b data-i18n="page.vs.r3">Drumul până la locație</b>
+            <span class="vs__no" data-i18n="page.vs.r3p">Doar adresa</span>
+            <span class="vs__yes" data-i18n="page.vs.r3s">Hartă și indicații</span>
+          </div>
+          <div class="vs__row" style="--i:3">
+            <b data-i18n="page.vs.r4">Pozele de după nuntă</b>
+            <span class="vs__no" data-i18n="page.vs.r4p">Nu are unde</span>
+            <span class="vs__yes" data-i18n="page.vs.r4s">În aceeași galerie</span>
+          </div>
+          <div class="vs__row" style="--i:4">
+            <b data-i18n="page.vs.r5">Cum ajunge la invitați</b>
+            <span class="vs__no" data-i18n="page.vs.r5p">Prin poștă sau personal</span>
+            <span class="vs__yes" data-i18n="page.vs.r5s">Un link pe WhatsApp</span>
+          </div>
+        </div>
+
+        <!-- Both: a printed card with a QR code -->
+        <div class="combo split reveal">
+          <div class="qr-card" aria-hidden="true">
+            <div class="qr-card__paper">
+              <small data-i18n="reel.wed.invite">Vă invităm la nunta noastră</small>
+              <p class="qr-card__names">Ana &amp; Mihai</p>
+              <div class="qr" id="qr"></div>
+              <span class="qr-card__hint" data-i18n="page.vs.scan">Scanați pentru detalii</span>
+            </div>
+          </div>
+          <div>
+            <h3 class="combo__title" data-i18n="page.vs.combo">Le puteți avea pe amândouă</h3>
+            <p data-i18n="page.vs.combot">Dacă vreți și o invitație tipărită, pentru bunici sau ca amintire, punem pe ea un cod QR care deschide site-ul. Așa aveți ce e mai frumos din ambele.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PERSONALISATION ============ -->
+    <section class="section">
+      <div class="container split">
+        <div class="reveal">
+          <p class="section__label" data-i18n="page.style.label">Personalizare</p>
+          <h2 data-i18n="page.style.title">Site-ul arată ca nunta voastră</h2>
+          <p data-i18n="page.style.p1">Culorile, fonturile și tonul se potrivesc cu tema nunții. Încercați câteva combinații în exemplul de alături.</p>
+          <ul class="ticks">
+            <li data-i18n="page.style.t1">Culorile și fonturile voastre</li>
+            <li data-i18n="page.style.t2">Mai multe limbi: română, maghiară, engleză</li>
+            <li data-i18n="page.style.t3">Potrivit pentru familii mixte</li>
+            <li data-i18n="page.style.t4">Adresa voastră, de exemplu ana-si-mihai.ro</li>
+          </ul>
+        </div>
+
+        <div class="studio reveal">
+          <div class="studio__preview" data-palette="classic" data-font="serif">
+            <div class="studio__bar">
+              <span class="studio__url"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>ana-si-mihai.ro</span>
+            </div>
+            <div class="studio__card">
+              <small class="studio__invite">Vă invităm la nunta noastră</small>
+              <p class="studio__names">Ana &amp; Mihai</p>
+              <p class="studio__date"><span class="wed-date">14.06.2027</span>, Deva</p>
+              <span class="studio__btn">Confirmă prezența</span>
+            </div>
+          </div>
+
+          <div class="studio__controls glass">
+            <div class="studio__group">
+              <span class="studio__label" data-i18n="page.style.colors">Culori</span>
+              <div class="studio__opts">
+                <button type="button" class="swatch is-picked" data-set-palette="classic" style="--a:#1F2A44;--b:#F6EFE6" aria-label="Clasic" data-i18n-label="page.style.c1"></button>
+                <button type="button" class="swatch" data-set-palette="sage" style="--a:#4E6B57;--b:#EEF2EA" aria-label="Verde salvie" data-i18n-label="page.style.c2"></button>
+                <button type="button" class="swatch" data-set-palette="blush" style="--a:#9C4F63;--b:#F9ECEE" aria-label="Roz pudrat" data-i18n-label="page.style.c3"></button>
+                <button type="button" class="swatch" data-set-palette="gold" style="--a:#8A6A2F;--b:#F7F0E1" aria-label="Auriu" data-i18n-label="page.style.c4"></button>
+              </div>
+            </div>
+            <div class="studio__group">
+              <span class="studio__label" data-i18n="page.style.fonts">Font</span>
+              <div class="studio__opts">
+                <button type="button" class="studio__font is-picked" data-set-font="serif" aria-label="Font clasic" data-i18n-label="page.style.f1">Aa</button>
+                <button type="button" class="studio__font studio__font--modern" data-set-font="modern" aria-label="Font modern" data-i18n-label="page.style.f2">Aa</button>
+              </div>
+            </div>
+            <div class="studio__group">
+              <span class="studio__label" data-i18n="page.style.langs">Limba</span>
+              <div class="studio__opts">
+                <button type="button" class="studio__lang is-picked" data-set-lang="ro">RO</button>
+                <button type="button" class="studio__lang" data-set-lang="hu">HU</button>
+                <button type="button" class="studio__lang" data-set-lang="en">EN</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROCESS ============ -->
+    <section class="section">
+      <div class="container split">
+        <div class="reveal">
+          <p class="section__label" data-i18n="process.label">Proces</p>
+          <h2 data-i18n="page.steps.title">De la idee la link</h2>
+          <p data-i18n="page.steps.p1">Simplu și fără stres, pentru că aveți destule de organizat.</p>
+        </div>
+        <ol class="steps-v reveal" data-animate>
+          <li style="--i:0"><span>1</span><div><h3 data-i18n="page.steps.s1">Ne povestiți</h3><p data-i18n="page.steps.s1t">Despre voi, despre nuntă și ce vă doriți de la site.</p></div></li>
+          <li style="--i:1"><span>2</span><div><h3 data-i18n="page.steps.s2">Alegem stilul</h3><p data-i18n="page.steps.s2t">Culori, fonturi și secțiuni, pe gustul vostru.</p></div></li>
+          <li style="--i:2"><span>3</span><div><h3 data-i18n="page.steps.s3">Construiesc site-ul</h3><p data-i18n="page.steps.s3t">Cu textele și pozele voastre.</p></div></li>
+          <li style="--i:3"><span>4</span><div><h3 data-i18n="page.steps.s4">Verificați și ajustăm</h3><p data-i18n="page.steps.s4t">Schimbăm tot ce nu vă place, până iese perfect.</p></div></li>
+          <li style="--i:4"><span>5</span><div><h3 data-i18n="page.steps.s5">Trimiteți linkul</h3><p data-i18n="page.steps.s5t">Pe WhatsApp, pe Facebook sau printr-un cod QR.</p></div></li>
+          <li style="--i:5"><span>6</span><div><h3 data-i18n="page.steps.s6">Îl actualizăm</h3><p data-i18n="page.steps.s6t">Până în ziua cea mare, iar după, cu pozele de la nuntă.</p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="section">
+      <div class="container">
+        <header class="svc-intro reveal">
+          <p class="section__label">FAQ</p>
+          <h2 data-i18n="svc.faq">Întrebări frecvente</h2>
+        </header>
+        <div class="faq reveal">
+          <details><summary data-i18n="page.faq.q1">Cu cât timp înainte ar trebui făcut site-ul?</summary><p data-i18n="page.faq.a1">Ideal cu două sau trei luni înainte de nuntă, ca invitații să aibă timp să confirme. Se poate și mai repede, dacă timpul e scurt.</p></details>
+          <details><summary data-i18n="page.faq.q2">Invitații au nevoie de vreo aplicație?</summary><p data-i18n="page.faq.a2">Nu. Site-ul se deschide direct din link, pe orice telefon sau calculator. Nu trebuie instalat nimic și nici creat vreun cont.</p></details>
+          <details><summary data-i18n="page.faq.q3">Putem schimba detaliile după ce trimitem linkul?</summary><p data-i18n="page.faq.a3">Da. Dacă se schimbă ora sau locul, actualizăm site-ul, iar invitații văd mereu varianta corectă, fără să retrimiteți nimic.</p></details>
+          <details><summary data-i18n="page.faq.q4">Ce se întâmplă cu site-ul după nuntă?</summary><p data-i18n="page.faq.a4">Îl putem păstra ca amintire, cu pozele de la nuntă, ca invitații să le vadă și să le descarce.</p></details>
+          <details><summary data-i18n="page.faq.q5">Putem avea și invitații tipărite?</summary><p data-i18n="page.faq.a5">Sigur. Punem pe invitația tipărită un cod QR care deschide site-ul, ca să le aveți pe amândouă.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ NEXT STEP ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="cta-band glass reveal">
+          <div>
+            <h2 data-i18n="svc.cta.title">Hai să vorbim despre proiectul tău.</h2>
+            <p data-i18n="svc.cta.text">Spune-mi ce ai în minte și îți răspund în 24 de ore cu pașii următori.</p>
+          </div>
+          <div class="cta-band__btns">
+            <a href="../#contact" class="btn btn--primary" data-i18n="svc.quote">Cere o ofertă</a>
+            <a href="https://wa.me/40727515052" class="btn btn--ghost" target="_blank" rel="noopener" data-i18n="contact.whatsapp">Scrie-mi pe WhatsApp</a>
+          </div>
+        </div>
+
+        <p class="section__label others__label" data-i18n="svc.others">Alte servicii</p>
+        <nav class="others reveal">
+          <a class="glass" href="../development/">R3w <span>Development</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="glass" href="../automation/">R3w <span>Automation</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="glass" href="../security/">R3w <span>Security</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="glass" href="../airbnb/">R3w <span>AirBnb</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </nav>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a href="../" class="logo" aria-label="R3w Development">
+        <svg class="wordmark" viewBox="-5 -5 107 46" width="79" height="34" aria-hidden="true">
+          <defs><filter id="neon-foot" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.4"/></filter></defs>
+          <path fill="currentColor" fill-rule="evenodd" d="M0 0H15A10.5 10.5 0 0 1 15 21H7V36H0Z M7 7H15A3.5 3.5 0 0 1 15 14H7Z"/>
+          <path fill="currentColor" d="M12.5 24H20L29.5 36H22Z"/>
+          <g class="neon" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path class="neon__glow" stroke-width="6" filter="url(#neon-foot)" d="M39.5 2.5H48.5A7.25 7.25 0 0 1 48.5 17H44M44 17H49.5A8.25 8.25 0 0 1 49.5 33.5H39.5"/>
+            <path class="neon__outline" stroke-width="6.6" d="M39.5 2.5H48.5A7.25 7.25 0 0 1 48.5 17H44M44 17H49.5A8.25 8.25 0 0 1 49.5 33.5H39.5"/>
+            <path class="neon__tube" stroke-width="5" d="M39.5 2.5H48.5A7.25 7.25 0 0 1 48.5 17H44M44 17H49.5A8.25 8.25 0 0 1 49.5 33.5H39.5"/>
+            <path class="neon__core" stroke-width="1.4" d="M39.5 2.5H48.5A7.25 7.25 0 0 1 48.5 17H44M44 17H49.5A8.25 8.25 0 0 1 49.5 33.5H39.5"/>
+          </g>
+          <path fill="none" stroke="currentColor" stroke-width="7" d="M70.5 10V27.25A5.75 5.75 0 0 0 82 27.25V18M82 27.25A5.75 5.75 0 0 0 93.5 27.25V10"/>
+        </svg>
+      </a>
+      <p>© <span id="year"></span> R3w Development. <span data-i18n="footer.rights">Toate drepturile rezervate.</span></p>
+    </div>
+  </footer>
+
+  <script src="../js/translations.js"></script>
+  <script src="i18n.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="page.js"></script>
+</body>
+</html>

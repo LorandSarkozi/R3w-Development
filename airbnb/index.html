@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>R3w AirBnb | Ghidul digital pentru oaspeții tăi</title>
+  <meta name="description" content="Un site privat, nelistat, pentru oaspeții locuinței tale: check-in, Wi-Fi, regulile casei și recomandări locale, într-un singur link.">
+  <meta name="theme-color" content="#040A18">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/service.css">
+  <link rel="stylesheet" href="page.css">
+  <script>
+    // Set the theme before the page paints, so there is no flash of the wrong colours
+    (function () {
+      var root = document.documentElement, saved;
+      root.classList.add('js');
+      try { saved = localStorage.getItem('theme'); } catch (e) {}
+      root.dataset.theme = saved || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    })();
+  </script>
+</head>
+<body>
+
+  <div class="backdrop" aria-hidden="true">
+    <div class="orb orb--sapphire"></div>
+    <div class="orb orb--ocean"></div>
+    <div class="orb orb--jade"></div>
+  </div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="top">
+    <div class="container nav__inner">
+      <a href="../" class="logo" aria-label="R3w Development">
+        <svg class="wordmark" viewBox="-5 -5 107 46" width="79" height="34" aria-hidden="true">
+          <defs><filter id="neon-nav" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.4"/></filter></defs>
+          <path fill="currentColor" fill-rule="evenodd" d="M0 0H15A10.5 10.5 0 0 1 15 21H7V36H0Z M7 7H15A3.5 3.5 0 0 1 15 14H7Z"/>
+          <path fill="currentColor" d="M12.5 24H20L29.5 36H22Z"/>
+          <g class="neon" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path class="neon__glow" stroke-width="6" filter="url(#neon-nav)" d="M39.5 2.5H48.5A7.25 7.25 0 0 1 48.5 17H44M44 17H49.5A8.25 8.25 0 0 1 49.5 33.5H39.5"/>
+            <path class="neon__outline" stroke-width="6.6" d="M39.5 2.5H48.5A7.25 7.25 0 0 1 48.5 17H44M44 17H49.5A8.25 8.25 0 0 1 49.5 33.5H39.5"/>
+            <path class="neon__tube" stroke-width="5" d="M39.5 2.5H48.5A7.25 7.25 0 0 1 48.5 17H44M44 17H49.5A8.25 8.25 0 0 1 49.5 33.5H39.5"/>
+            <path class="neon__core" stroke-width="1.4" d="M39.5 2.5H48.5A7.25 7.25 0 0 1 48.5 17H44M44 17H49.5A8.25 8.25 0 0 1 49.5 33.5H39.5"/>
+          </g>
+          <path fill="none" stroke="currentColor" stroke-width="7" d="M70.5 10V27.25A5.75 5.75 0 0 0 82 27.25V18M82 27.25A5.75 5.75 0 0 0 93.5 27.25V10"/>
+        </svg>
+      </a>
+
+      <nav class="nav__menu" id="nav-menu">
+        <a href="../#about" data-i18n="nav.about">Despre</a>
+        <a href="../#solutions" data-i18n="nav.solutions">Servicii</a>
+        <a href="../#work" data-i18n="nav.work">Proiecte</a>
+        <a href="../#process" data-i18n="nav.process">Proces</a>
+        <a href="../#contact" class="btn btn--small btn--primary" data-i18n="nav.cta">Hai să vorbim</a>
+      </nav>
+
+      <div class="nav__controls">
+        <div class="lang" role="group" aria-label="Limba" data-i18n-label="ui.language">
+          <button type="button" data-lang="ro" aria-pressed="true">RO</button>
+          <button type="button" data-lang="hu" aria-pressed="false">HU</button>
+          <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+
+        <button type="button" class="theme-toggle" aria-label="Schimbă tema" data-i18n-label="ui.theme">
+          <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        </button>
+
+        <button class="nav__toggle" aria-label="Deschide meniul" data-i18n-label="ui.menuOpen" aria-expanded="false" aria-controls="nav-menu">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <section class="svc-hero">
+      <div class="container svc-hero__inner">
+        <div class="reveal">
+          <a class="back" href="../#solutions"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span data-i18n="svc.back">Toate serviciile</span></a>
+          <p class="section__label">R3w AirBnb</p>
+          <h1 data-i18n="page.hero.title">Ghidul digital pentru <span class="mark">oaspeții tăi.</span></h1>
+          <p class="svc-lead" data-i18n="page.hero.lead">Un site mic și privat, doar pentru cei care au rezervat la tine. Check-in, Wi-Fi, regulile casei și locurile tale preferate din oraș, toate într-un singur link pe care îl trimiți după rezervare.</p>
+          <div class="hero__cta">
+            <a href="../#contact" class="btn btn--primary" data-i18n="svc.quote">Cere o ofertă</a>
+            <a href="#demo" class="btn btn--ghost" data-i18n="page.hero.cta2">Încearcă demo-ul</a>
+          </div>
+        </div>
+
+        <!-- The guest gets the booking message, taps the link and the guide opens -->
+        <div class="bnb-hero reveal" data-animate aria-hidden="true">
+          <div class="bnb-phone">
+            <div class="bnb-screen">
+              <div class="bnb-chat">
+                <div class="bnb-chat__head"><i>A</i><div><b>Ana</b><small data-i18n="page.hero.host">gazda ta</small></div></div>
+                <div class="bnb-notif">
+                  <i class="bnb-notif__app"></i>
+                  <div><b data-i18n="page.hero.notif">Rezervare confirmată</b><small data-i18n="page.hero.notifSub">3 nopți, 2 oaspeți</small></div>
+                </div>
+                <span class="bnb-day" data-i18n="page.hero.today">Azi</span>
+                <div class="bnb-msg bnb-msg--me"><span data-i18n="page.hero.me">Am rezervat pentru weekend, abia aștept!</span></div>
+                <div class="bnb-msg bnb-msg--host">
+                  <span data-i18n="page.hero.msg">Bună, Andrei! Aici ai tot ce-ți trebuie pentru sejur:</span>
+                  <span class="bnb-linkchip"><svg viewBox="0 0 24 24"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg><span data-i18n="page.hero.link">Ghidul tău</span></span>
+                </div>
+              </div>
+
+              <div class="bnb-guide">
+                <div class="bnb-guide__hero">
+                  <b data-i18n="page.hero.welcome">Bine ai venit, Andrei!</b>
+                  <small data-i18n="page.hero.place">Apartament Cetate, Deva</small>
+                </div>
+                <ul class="bnb-guide__list">
+                  <li style="--i:0"><svg viewBox="0 0 24 24"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m10.7 12.3 9.8-9.8M17 6l3 3M14 9l2 2"/></svg><span>Check-in</span><b>15:00</b></li>
+                  <li style="--i:1"><svg viewBox="0 0 24 24"><path d="M2 8.8a15 15 0 0 1 20 0M5 12.6a10 10 0 0 1 14 0M8.5 16.3a5 5 0 0 1 7 0"/><circle cx="12" cy="20" r="1"/></svg><span>Wi-Fi</span><b>CetateDeva_5G</b></li>
+                  <li style="--i:2"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M10 17V7h3a3 3 0 0 1 0 6h-3"/></svg><span data-i18n="page.hero.park">Parcare</span><b data-i18n="page.hero.parkVal">În curte</b></li>
+                  <li style="--i:3"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg><span data-i18n="page.hero.tips">Recomandări</span><b data-i18n="page.hero.tipsVal">6 locuri</b></li>
+                </ul>
+                <div class="bnb-guide__map"><i></i></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bnb-chip bnb-chip--a glass"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span data-i18n="page.hero.chip1">Link privat</span></div>
+          <div class="bnb-chip bnb-chip--b glass"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><span>RO / HU / EN</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ THE PROBLEM ============ -->
+    <section class="section">
+      <div class="container split">
+        <div class="reveal">
+          <p class="section__label" data-i18n="page.prob.label">Problema</p>
+          <h2 data-i18n="page.prob.title">Aceleași întrebări, de la fiecare oaspete</h2>
+          <p data-i18n="page.prob.p1">Fiecare gazdă știe cum e: parola de la Wi-Fi, ora de check-in, unde se parchează, cum pornește centrala. Le explici o dată, apoi încă o dată, apoi la miezul nopții, când cineva stă cu bagajele în fața ușii.</p>
+          <p data-i18n="page.prob.p2">Un ghid digital răspunde în locul tău, la orice oră. Tu trimiți un singur link, iar oaspetele găsește totul acolo, cu poze și explicații clare.</p>
+        </div>
+
+        <!-- Questions pile up, then one link answers them all -->
+        <div class="inbox glass reveal" data-animate aria-hidden="true">
+          <div class="inbox__head">
+            <b data-i18n="page.prob.inbox">Mesaje</b>
+            <span class="inbox__count">
+              <span class="inbox__label" data-i18n="page.prob.repeat">Întrebări repetate</span>
+              <span class="inbox__num">
+                <em class="inbox__num-a" data-count="5">5</em>
+                <em class="inbox__num-b">0</em>
+              </span>
+            </span>
+          </div>
+          <ul class="inbox__list">
+            <li style="--i:0"><i>M</i><div><b>Mihai</b><span data-i18n="page.prob.q1">Care e parola de la Wi-Fi?</span></div></li>
+            <li style="--i:1"><i>L</i><div><b>Laura</b><span data-i18n="page.prob.q2">La ce oră e check-in?</span></div></li>
+            <li style="--i:2"><i>T</i><div><b>Tom</b><span data-i18n="page.prob.q3">Unde pot parca?</span></div></li>
+            <li style="--i:3"><i>I</i><div><b>Ioana</b><span data-i18n="page.prob.q4">Cum pornesc centrala?</span></div></li>
+            <li style="--i:4"><i>A</i><div><b>Andrei</b><span data-i18n="page.prob.q1">Care e parola de la Wi-Fi?</span></div></li>
+          </ul>
+          <div class="inbox__answer">
+            <span data-i18n="page.prob.answer">Totul e aici:</span>
+            <span class="bnb-linkchip"><svg viewBox="0 0 24 24"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg><span data-i18n="page.prob.guide">Ghidul casei</span></span>
+          </div>
+          <button type="button" class="inbox__replay" aria-label="Reia animația" data-i18n-label="page.prob.replay">
+            <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WHAT'S INSIDE ============ -->
+    <section class="section">
+      <div class="container">
+        <header class="svc-intro reveal">
+          <p class="section__label" data-i18n="page.in.label">Ce conține</p>
+          <h2 data-i18n="page.in.title">Tot ce întreabă un oaspete, într-un singur loc</h2>
+          <p data-i18n="page.in.p1">Alegi ce intră în ghid. Iată ce pun de obicei, pentru ca nimeni să nu mai fie nevoit să te sune.</p>
+        </header>
+        <div class="feat-grid">
+          <article class="feat glass reveal">
+            <h3 class="with-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m10.7 12.3 9.8-9.8M17 6l3 3M14 9l2 2"/></svg><span data-i18n="page.in.f1">Check-in pas cu pas</span></h3>
+            <p data-i18n="page.in.f1t">De la poartă până la ușă, cu poze sau un video scurt. Codul de la cutia cu chei, etajul, numărul apartamentului.</p>
+          </article>
+          <article class="feat glass reveal">
+            <h3 class="with-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 8.8a15 15 0 0 1 20 0M5 12.6a10 10 0 0 1 14 0M8.5 16.3a5 5 0 0 1 7 0"/><circle cx="12" cy="20" r="1"/></svg><span data-i18n="page.in.f2">Wi-Fi dintr-o atingere</span></h3>
+            <p data-i18n="page.in.f2t">Numele rețelei și parola, cu un buton care o copiază direct. Nimeni nu mai tastează litere greșite.</p>
+          </article>
+          <article class="feat glass reveal">
+            <h3 class="with-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V2.8h6V4M9 10h6M9 14h6M9 18h4"/></svg><span data-i18n="page.in.f3">Regulile casei</span></h3>
+            <p data-i18n="page.in.f3t">Liniștea după o anumită oră, fumatul, animalele, gunoiul. Spuse frumos și clar, înainte să apară o problemă.</p>
+          </article>
+          <article class="feat glass reveal">
+            <h3 class="with-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 2v6M15 2v6M6 8h12v4a6 6 0 0 1-12 0Z"/><path d="M12 18v4"/></svg><span data-i18n="page.in.f4">Cum folosești aparatele</span></h3>
+            <p data-i18n="page.in.f4t">Centrala, aerul condiționat, mașina de spălat, televizorul. Câteva rânduri și o poză pentru fiecare.</p>
+          </article>
+          <article class="feat glass reveal">
+            <h3 class="with-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M10 17V7h3a3 3 0 0 1 0 6h-3"/></svg><span data-i18n="page.in.f5">Parcare</span></h3>
+            <p data-i18n="page.in.f5t">Unde se lasă mașina, dacă e gratuit și ce străzi e mai bine să ocolească la sosire.</p>
+          </article>
+          <article class="feat glass reveal">
+            <h3 class="with-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg><span data-i18n="page.in.f6">Recomandările tale</span></h3>
+            <p data-i18n="page.in.f6t">Restaurantele, cafenelele și locurile pe care le-ai recomanda unui prieten, cu hartă și distanță.</p>
+          </article>
+          <article class="feat glass reveal">
+            <h3 class="with-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span data-i18n="page.in.f7">Contacte de urgență</span></h3>
+            <p data-i18n="page.in.f7t">Numărul tău, 112, cea mai apropiată farmacie și un spital, la îndemână când contează.</p>
+          </article>
+          <article class="feat glass reveal">
+            <h3 class="with-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="m10 17 5-5-5-5M15 12H3"/></svg><span data-i18n="page.in.f8">Check-out</span></h3>
+            <p data-i18n="page.in.f8t">O listă scurtă: ora, unde rămân cheile, ce se face cu prosoapele. Plecarea e la fel de ușoară ca sosirea.</p>
+          </article>
+          <article class="feat glass reveal">
+            <h3 class="with-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><span data-i18n="page.in.f9">Mai multe limbi</span></h3>
+            <p data-i18n="page.in.f9t">Româna, maghiara, engleza sau alte limbi, după oaspeții pe care îi ai. Fiecare citește în limba lui.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LIVE DEMO ============ -->
+    <section class="section" id="demo">
+      <div class="container split split--flip">
+        <div class="reveal">
+          <p class="section__label" data-i18n="page.demo.label">Încearcă</p>
+          <h2 data-i18n="page.demo.title">Așa arată ghidul pe telefonul oaspetelui</h2>
+          <p data-i18n="page.demo.p1">Apasă pe taburi și vezi cum găsește oaspetele informațiile. Butonul de copiere chiar funcționează, încearcă-l.</p>
+          <ul class="ticks">
+            <li data-i18n="page.demo.t1">Se deschide în browser, fără aplicații</li>
+            <li data-i18n="page.demo.t2">Arată bine pe orice telefon</li>
+            <li data-i18n="page.demo.t3">Se încarcă repede, chiar și pe date mobile</li>
+          </ul>
+        </div>
+
+        <div class="demo reveal">
+          <div class="bnb-phone bnb-phone--demo">
+            <div class="bnb-screen demo__screen">
+              <div class="demo__top">
+                <b data-i18n="page.hero.place">Apartament Cetate, Deva</b>
+                <small data-i18n="page.demo.sub">Ghidul tău pentru sejur</small>
+              </div>
+              <div class="demo__tabs" role="tablist">
+                <button type="button" role="tab" aria-selected="true" data-tab="checkin">Check-in</button>
+                <button type="button" role="tab" aria-selected="false" data-tab="wifi">Wi-Fi</button>
+                <button type="button" role="tab" aria-selected="false" data-tab="local" data-i18n="page.demo.tab3">Local</button>
+              </div>
+
+              <div class="demo__panel is-active" data-panel="checkin" role="tabpanel">
+                <ol class="demo__steps">
+                  <li><b>1</b><span data-i18n="page.demo.c1">Intri pe poarta mare, apoi pe ușa din stânga.</span></li>
+                  <li><b>2</b><span data-i18n="page.demo.c2">Cutia cu cheia e lângă ușă. Codul e 4821.</span></li>
+                  <li><b>3</b><span data-i18n="page.demo.c3">Apartamentul 7, la etajul 2.</span></li>
+                </ol>
+                <div class="demo__video">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m10 8 6 4-6 4Z"/></svg>
+                  <span data-i18n="page.demo.video">Video: drumul până la ușă</span>
+                </div>
+              </div>
+
+              <div class="demo__panel" data-panel="wifi" role="tabpanel">
+                <div class="demo__wifi">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 8.8a15 15 0 0 1 20 0M5 12.6a10 10 0 0 1 14 0M8.5 16.3a5 5 0 0 1 7 0"/><circle cx="12" cy="20" r="1"/></svg>
+                  <div class="demo__field"><small data-i18n="page.demo.net">Rețea</small><b>CetateDeva_5G</b></div>
+                  <div class="demo__field"><small data-i18n="page.demo.pass">Parolă</small><b class="demo__pw">cetate2027</b></div>
+                  <button type="button" class="demo__copy">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg>
+                    <span data-i18n="page.demo.copy">Copiază parola</span>
+                  </button>
+                  <p class="demo__toast" role="status" aria-live="polite"></p>
+                </div>
+              </div>
+
+              <div class="demo__panel" data-panel="local" role="tabpanel">
+                <ul class="demo__places">
+                  <li><i class="demo__pic demo__pic--a"></i><div><b data-i18n="page.demo.l1">Cetatea Deva</b><small data-i18n="page.demo.l1s">10 min pe jos</small></div></li>
+                  <li><i class="demo__pic demo__pic--b"></i><div><b data-i18n="page.demo.l2">Cafenea în centru</b><small data-i18n="page.demo.l2s">5 min pe jos, cafea bună dimineața</small></div></li>
+                  <li><i class="demo__pic demo__pic--c"></i><div><b data-i18n="page.demo.l3">Restaurant cu mâncare locală</b><small data-i18n="page.demo.l3s">8 min pe jos, rezervă seara</small></div></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PRIVATE AND UNLISTED ============ -->
+    <section class="section">
+      <div class="container split">
+        <div class="reveal">
+          <p class="section__label" data-i18n="page.priv.label">Privat</p>
+          <h2 data-i18n="page.priv.title">Nelistat înseamnă că îl văd doar oaspeții tăi</h2>
+          <p data-i18n="page.priv.p1">Ghidul nu apare pe Google și nu are un link pe care să-l găsească cineva întâmplător. Îl deschide doar cine a primit linkul de la tine, adică oaspetele care a rezervat.</p>
+          <ul class="ticks">
+            <li data-i18n="page.priv.t1">Nu apare în căutările de pe Google</li>
+            <li data-i18n="page.priv.t2">Îl văd doar oaspeții care au linkul</li>
+            <li data-i18n="page.priv.t3">Linkul se poate schimba la fiecare rezervare</li>
+            <li data-i18n="page.priv.t4">Oaspeții nu au nevoie de cont sau parolă</li>
+          </ul>
+        </div>
+
+        <!-- Search finds nothing, the guest's link opens it -->
+        <div class="privacy reveal" data-animate aria-hidden="true">
+          <div class="privacy__card glass">
+            <div class="privacy__search">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+              <span class="privacy__typed" data-i18n="page.priv.query">ghid apartament cetate deva</span>
+            </div>
+            <ul class="privacy__results">
+              <li><i></i><i></i></li>
+              <li><i></i><i></i></li>
+              <li><i></i><i></i></li>
+            </ul>
+            <span class="privacy__badge">
+              <svg viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M10.6 5.1A10 10 0 0 1 12 5c6 0 10 7 10 7a17 17 0 0 1-3.2 3.9M6.6 6.6C3.9 8.4 2 12 2 12s4 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>
+              <span data-i18n="page.priv.badge1">Ghidul nu apare în căutări</span>
+            </span>
+          </div>
+
+          <div class="privacy__card privacy__card--link glass">
+            <span class="privacy__lock">
+              <svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path class="privacy__shackle" d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+            </span>
+            <div class="privacy__link">
+              <b data-i18n="page.priv.linkTitle">Linkul oaspetelui</b>
+              <small>/g/7Fk2Qa</small>
+            </div>
+            <span class="privacy__badge privacy__badge--ok" data-i18n="page.priv.badge2">Acces doar cu link</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW IT FLOWS ============ -->
+    <section class="section">
+      <div class="container">
+        <header class="svc-intro reveal">
+          <p class="section__label" data-i18n="page.flow.label">Cum funcționează</p>
+          <h2 data-i18n="page.flow.title">De la rezervare până la recenzie</h2>
+          <p data-i18n="page.flow.p1">Ghidul își face treaba în liniște, între momentul în care cineva rezervă și momentul în care pleacă mulțumit.</p>
+        </header>
+
+        <div class="flow-line reveal" data-animate style="--n:5">
+          <div class="flow-step" style="--i:0">
+            <span class="flow-step__icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>
+            <b data-i18n="page.flow.f1">Rezervare</b>
+            <small data-i18n="page.flow.f1s">pe Airbnb sau direct</small>
+          </div>
+          <div class="flow-step" style="--i:1">
+            <span class="flow-step__icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/></svg></span>
+            <b data-i18n="page.flow.f2">Mesaj cu linkul</b>
+            <small data-i18n="page.flow.f2s">poate pleca automat</small>
+          </div>
+          <div class="flow-step" style="--i:2">
+            <span class="flow-step__icon"><svg viewBox="0 0 24 24"><path d="M2 5h6a4 4 0 0 1 4 4v12a3 3 0 0 0-3-3H2Z"/><path d="M22 5h-6a4 4 0 0 0-4 4v12a3 3 0 0 1 3-3h7Z"/></svg></span>
+            <b data-i18n="page.flow.f3">Oaspetele citește</b>
+            <small data-i18n="page.flow.f3s">înainte de drum</small>
+          </div>
+          <div class="flow-step" style="--i:3">
+            <span class="flow-step__icon"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1Z"/></svg></span>
+            <b data-i18n="page.flow.f4">Sosire liniștită</b>
+            <small data-i18n="page.flow.f4s">fără telefoane</small>
+          </div>
+          <div class="flow-step" style="--i:4">
+            <span class="flow-step__icon"><svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9Z"/></svg></span>
+            <b data-i18n="page.flow.f5">Recenzie mai bună</b>
+            <small data-i18n="page.flow.f5s">oaspete mulțumit</small>
+          </div>
+        </div>
+
+        <p class="flow-note reveal">
+          <span data-i18n="page.flow.note">Mesajul cu linkul poate pleca singur la fiecare rezervare, fără să-l mai trimiți tu.</span>
+          <a href="../automation/" class="link"><span data-i18n="page.flow.auto">Vezi R3w Automation</span> <span class="arrow" aria-hidden="true">→</span></a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ BEFORE AND AFTER ============ -->
+    <section class="section">
+      <div class="container">
+        <header class="svc-intro reveal">
+          <p class="section__label" data-i18n="page.ben.label">Ce câștigi</p>
+          <h2 data-i18n="page.ben.title">Mai puțin telefon, mai mult timp pentru tine</h2>
+        </header>
+
+        <div class="bnb-compare">
+          <div class="bnb-compare__col glass reveal" data-animate>
+            <h3 data-i18n="page.ben.without">Fără ghid</h3>
+            <div class="meters">
+              <div class="meter meter--alt" style="--v:.9;--t:0s"><div class="meter__head"><span data-i18n="page.ben.m1">Mesaje cu aceleași întrebări</span></div><div class="meter__bar"><i></i></div></div>
+              <div class="meter meter--alt" style="--v:.75;--t:.1s"><div class="meter__head"><span data-i18n="page.ben.m2">Telefoane la sosire</span></div><div class="meter__bar"><i></i></div></div>
+              <div class="meter meter--alt" style="--v:.8;--t:.2s"><div class="meter__head"><span data-i18n="page.ben.m3">Timpul tău pierdut</span></div><div class="meter__bar"><i></i></div></div>
+              <div class="meter meter--alt" style="--v:.6;--t:.3s"><div class="meter__head"><span data-i18n="page.ben.m4">Oaspeți care se rătăcesc</span></div><div class="meter__bar"><i></i></div></div>
+            </div>
+          </div>
+          <div class="bnb-compare__col glass reveal" data-animate>
+            <h3 data-i18n="page.ben.with">Cu ghidul R3w</h3>
+            <div class="meters">
+              <div class="meter" style="--v:.12;--t:0s"><div class="meter__head"><span data-i18n="page.ben.m1">Mesaje cu aceleași întrebări</span></div><div class="meter__bar"><i></i></div></div>
+              <div class="meter" style="--v:.1;--t:.1s"><div class="meter__head"><span data-i18n="page.ben.m2">Telefoane la sosire</span></div><div class="meter__bar"><i></i></div></div>
+              <div class="meter" style="--v:.12;--t:.2s"><div class="meter__head"><span data-i18n="page.ben.m3">Timpul tău pierdut</span></div><div class="meter__bar"><i></i></div></div>
+              <div class="meter" style="--v:.08;--t:.3s"><div class="meter__head"><span data-i18n="page.ben.m4">Oaspeți care se rătăcesc</span></div><div class="meter__bar"><i></i></div></div>
+            </div>
+          </div>
+        </div>
+
+        <ul class="bnb-benefits reveal" data-animate>
+          <li class="glass" style="--i:0">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/><path d="M8 9h8M8 13h5"/></svg>
+            <b data-i18n="page.ben.b1">Mai puține mesaje</b>
+            <span data-i18n="page.ben.b1t">Oaspeții găsesc singuri răspunsurile, la orice oră.</span>
+          </li>
+          <li class="glass" style="--i:1">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m10.7 12.3 9.8-9.8M17 6l3 3M14 9l2 2"/></svg>
+            <b data-i18n="page.ben.b2">Sosiri fără stres</b>
+            <span data-i18n="page.ben.b2t">Instrucțiuni clare, cu poze, până la ușă.</span>
+          </li>
+          <li class="glass" style="--i:2">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9Z"/></svg>
+            <b data-i18n="page.ben.b3">O imagine profesionistă</b>
+            <span data-i18n="page.ben.b3t">Un ghid îngrijit arată cât de mult ții la locuință și la oaspeți.</span>
+          </li>
+          <li class="glass" style="--i:3">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Z"/><path d="M9 21v-6h6v6"/></svg>
+            <b data-i18n="page.ben.b4">Pentru mai multe locuințe</b>
+            <span data-i18n="page.ben.b4t">Fiecare proprietate are ghidul ei, toate construite la fel.</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ PROCESS ============ -->
+    <section class="section">
+      <div class="container split">
+        <div class="reveal">
+          <p class="section__label" data-i18n="process.label">Proces</p>
+          <h2 data-i18n="page.steps.title">Cum ajunge ghidul la oaspeții tăi</h2>
+          <p data-i18n="page.steps.p1">Tu îmi spui ce știi despre locuință, eu mă ocup de restul. Durează puțin și se face o singură dată.</p>
+        </div>
+        <ol class="steps-v reveal" data-animate>
+          <li style="--i:0"><span>1</span><div><h3 data-i18n="page.steps.s1">Îmi povestești despre locuință</h3><p data-i18n="page.steps.s1t">Cum se ajunge, ce reguli ai, ce întreabă oaspeții cel mai des.</p></div></li>
+          <li style="--i:1"><span>2</span><div><h3 data-i18n="page.steps.s2">Strâng informațiile și pozele</h3><p data-i18n="page.steps.s2t">Îmi trimiți poze sau un video scurt, iar eu le aranjez frumos.</p></div></li>
+          <li style="--i:2"><span>3</span><div><h3 data-i18n="page.steps.s3">Construiesc ghidul</h3><p data-i18n="page.steps.s3t">Cu culorile și numele locuinței tale, în limbile de care ai nevoie.</p></div></li>
+          <li style="--i:3"><span>4</span><div><h3 data-i18n="page.steps.s4">Îl testezi ca un oaspete</h3><p data-i18n="page.steps.s4t">Îl deschizi pe telefon și îmi spui ce mai lipsește.</p></div></li>
+          <li style="--i:4"><span>5</span><div><h3 data-i18n="page.steps.s5">Îl trimiți la fiecare rezervare</h3><p data-i18n="page.steps.s5t">Un link în mesajul de bun venit, trimis de tine sau automat.</p></div></li>
+          <li style="--i:5"><span>6</span><div><h3 data-i18n="page.steps.s6">Îl actualizăm oricând</h3><p data-i18n="page.steps.s6t">S-a schimbat parola sau ai un restaurant nou de recomandat? Se rezolvă repede.</p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="section">
+      <div class="container">
+        <header class="svc-intro reveal">
+          <p class="section__label">FAQ</p>
+          <h2 data-i18n="svc.faq">Întrebări frecvente</h2>
+        </header>
+        <div class="faq reveal">
+          <details><summary data-i18n="page.faq.q1">Pot actualiza informațiile singur?</summary><p data-i18n="page.faq.a1">Da. Dacă vrei, primești un panou simplu din care schimbi parola de Wi-Fi, ora de check-in sau recomandările. Dacă nu, îmi scrii și o schimb eu.</p></details>
+          <details><summary data-i18n="page.faq.q2">Merge pentru mai multe proprietăți?</summary><p data-i18n="page.faq.a2">Da. Fiecare locuință primește ghidul ei, cu informațiile ei, și toate arată la fel de îngrijit.</p></details>
+          <details><summary data-i18n="page.faq.q3">Oaspeții trebuie să instaleze ceva?</summary><p data-i18n="page.faq.a3">Nu. Ghidul se deschide direct în browserul telefonului, din linkul primit. Fără aplicații și fără conturi.</p></details>
+          <details><summary data-i18n="page.faq.q4">În ce limbi poate fi ghidul?</summary><p data-i18n="page.faq.a4">În ce limbi ai nevoie. De obicei româna, maghiara și engleza, dar se pot adăuga și altele, după oaspeții pe care îi primești.</p></details>
+          <details><summary data-i18n="page.faq.q5">Se poate trimite linkul automat la fiecare rezervare?</summary><p data-i18n="page.faq.a5">Da, împreună cu R3w Automation. Mesajul de bun venit cu linkul pleacă singur, imediat după rezervare.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ NEXT STEP ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="cta-band glass reveal">
+          <div>
+            <h2 data-i18n="svc.cta.title">Hai să vorbim despre proiectul tău.</h2>
+            <p data-i18n="svc.cta.text">Spune-mi ce ai în minte și îți răspund în 24 de ore cu pașii următori.</p>
+          </div>
+          <div class="cta-band__btns">
+            <a href="../#contact" class="btn btn--primary" data-i18n="svc.quote">Cere o ofertă</a>
+            <a href="https://wa.me/40727515052" class="btn btn--ghost" target="_blank" rel="noopener" data-i18n="contact.whatsapp">Scrie-mi pe WhatsApp</a>
+          </div>
+        </div>
+
+        <p class="section__label others__label" data-i18n="svc.others">Alte servicii</p>
+        <nav class="others reveal">
+          <a class="glass" href="../development/">R3w <span>Development</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="glass" href="../automation/">R3w <span>Automation</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="glass" href="../security/">R3w <span>Security</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="glass" href="../weddings/">R3w <span>Weddings</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </nav>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a href="../" class="logo" aria-label="R3w Development">
+        <svg class="wordmark" viewBox="-5 -5 107 46" width="79" height="34" aria-hidden="true">
+          <defs><filter id="neon-foot" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.4"/></filter></defs>
+          <path fill="currentColor" fill-rule="evenodd" d="M0 0H15A10.5 10.5 0 0 1 15 21H7V36H0Z M7 7H15A3.5 3.5 0 0 1 15 14H7Z"/>
+          <path fill="currentColor" d="M12.5 24H20L29.5 36H22Z"/>
+          <g class="neon" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path class="neon__glow" stroke-width="6" filter="url(#neon-foot)" d="M39.5 2.5H48.5A7.25 7.25 0 0 1 48.5 17H44M44 17H49.5A8.25 8.25 0 0 1 49.5 33.5H39.5"/>
+            <path class="neon__outline" stroke-width="6.6" d="M39.5 2.5H48.5A7.25 7.25 0 0 1 48.5 17H44M44 17H49.5A8.25 8.25 0 0 1 49.5 33.5H39.5"/>
+            <path class="neon__tube" stroke-width="5" d="M39.5 2.5H48.5A7.25 7.25 0 0 1 48.5 17H44M44 17H49.5A8.25 8.25 0 0 1 49.5 33.5H39.5"/>
+            <path class="neon__core" stroke-width="1.4" d="M39.5 2.5H48.5A7.25 7.25 0 0 1 48.5 17H44M44 17H49.5A8.25 8.25 0 0 1 49.5 33.5H39.5"/>
+          </g>
+          <path fill="none" stroke="currentColor" stroke-width="7" d="M70.5 10V27.25A5.75 5.75 0 0 0 82 27.25V18M82 27.25A5.75 5.75 0 0 0 93.5 27.25V10"/>
+        </svg>
+      </a>
+      <p>© <span id="year"></span> R3w Development. <span data-i18n="footer.rights">Toate drepturile rezervate.</span></p>
+    </div>
+  </footer>
+
+  <script src="../js/translations.js"></script>
+  <script src="i18n.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="page.js"></script>
+</body>
+</html>
