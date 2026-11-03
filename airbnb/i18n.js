@@ -11,7 +11,7 @@ Object.assign(TRANSLATIONS.hu, {
 
   'page.hero.title': 'Digitális útmutató <span class="mark">a vendégeidnek.</span>',
   'page.hero.lead': 'Egy kicsi, privát weboldal csak azoknak, akik nálad foglaltak. Bejelentkezés, Wi-Fi, házirend és a kedvenc helyeid a városban, mind egyetlen linken, amit a foglalás után elküldesz.',
-  'page.hero.cta2': 'Próbáld ki a demót',
+  'page.hero.cta2': 'Próbáld ki az útmutatót',
   'page.hero.host': 'a szállásadód',
   'page.hero.today': 'Ma',
   'page.hero.me': 'Hétvégére foglaltam, már nagyon várom!',
@@ -165,7 +165,7 @@ Object.assign(TRANSLATIONS.en, {
 
   'page.hero.title': 'A digital guide <span class="mark">for your guests.</span>',
   'page.hero.lead': 'A small, private website just for the people who booked with you. Check-in, Wi-Fi, house rules and your favourite places in town, all in one link you send after the booking.',
-  'page.hero.cta2': 'Try the demo',
+  'page.hero.cta2': 'Try the guide',
   'page.hero.host': 'your host',
   'page.hero.today': 'Today',
   'page.hero.me': "Booked for the weekend, can't wait!",
