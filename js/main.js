@@ -59,11 +59,13 @@ function setTheme(theme) {
   themeColor.content = theme === 'light' ? '#EEF3FB' : '#040A18';
 }
 
-document.querySelector('.theme-toggle').addEventListener('click', () => {
-  const next = root.dataset.theme === 'light' ? 'dark' : 'light';
-  setTheme(next);
-  store.set('theme', next);
-});
+document.querySelectorAll('.theme-toggle').forEach((btn) =>
+  btn.addEventListener('click', () => {
+    const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+    setTheme(next);
+    store.set('theme', next);
+  })
+);
 
 setTheme(root.dataset.theme);
 
@@ -76,19 +78,17 @@ function updateMenuLabel() {
   const open = menu.classList.contains('is-open');
   toggle.setAttribute('aria-expanded', open);
   toggle.setAttribute('aria-label', t(open ? 'ui.menuClose' : 'ui.menuOpen'));
+  root.classList.toggle('menu-open', open); // stops the page scrolling behind the menu
 }
 
-toggle.addEventListener('click', () => {
-  menu.classList.toggle('is-open');
+const setMenu = (open) => {
+  menu.classList.toggle('is-open', open);
   updateMenuLabel();
-});
+};
 
-menu.querySelectorAll('a').forEach((link) =>
-  link.addEventListener('click', () => {
-    menu.classList.remove('is-open');
-    updateMenuLabel();
-  })
-);
+toggle.addEventListener('click', () => setMenu(!menu.classList.contains('is-open')));
+menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
 
 // ---------- Scroll effects ----------
 
@@ -158,6 +158,7 @@ const stage = document.querySelector('.stage');
 if (stage) {
   const scenes = [...stage.querySelectorAll('.scene')];
   const tabs = [...stage.querySelectorAll('.reel__tab')];
+  const caption = stage.querySelector('.reel__caption'); // scene name on phones
   let current = 0;
   let typing;
 
@@ -213,12 +214,23 @@ if (stage) {
     void scene.offsetWidth; // restart the CSS animations
     scene.classList.add('is-playing');
     tabs[current].classList.add('is-active');
+    if (caption) caption.textContent = `R3w ${tabs[current].textContent.trim()}`;
 
     aimCursor(scene);
     typeHeadline(scene);
   };
 
   tabs.forEach((tab, i) => tab.addEventListener('click', () => showScene(i)));
+
+  // Swipe left or right on a phone to change scene
+  let touchX = null;
+  stage.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+  stage.addEventListener('touchend', (e) => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 40) showScene(current + (dx < 0 ? 1 : -1));
+    touchX = null;
+  });
   stage.querySelector('.reel').addEventListener('animationend', (e) => {
     if (e.animationName === 'reel-progress') showScene(current + 1);
   });
@@ -323,6 +335,39 @@ if (projects) {
     track.addEventListener('scroll', update, { passive: true });
     update();
   });
+}
+
+// ---------- Quick contact button (phones) ----------
+
+const quick = document.querySelector('.quick');
+
+if (quick) {
+  const quickBtn = quick.querySelector('.quick__btn');
+  const contactSection = document.getElementById('contact');
+  let contactInView = false;
+
+  const setQuick = (open) => {
+    quick.classList.toggle('is-open', open);
+    quickBtn.setAttribute('aria-expanded', open);
+  };
+  quickBtn.addEventListener('click', () => setQuick(!quick.classList.contains('is-open')));
+  quick.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setQuick(false)));
+  // a tap anywhere else, including the dimmed page behind, closes it
+  document.addEventListener('click', (e) => { if (!quick.contains(e.target) || e.target === quick) setQuick(false); });
+
+  // Show it once the visitor starts scrolling, hide it where contact details are already on screen
+  const updateQuick = () => {
+    const show = window.scrollY > 500 && !contactInView && !menu.classList.contains('is-open');
+    quick.classList.toggle('is-shown', show);
+    if (!show) setQuick(false);
+  };
+  if (contactSection) {
+    new IntersectionObserver(([entry]) => { contactInView = entry.isIntersecting; updateQuick(); }, { threshold: 0.15 })
+      .observe(contactSection);
+  }
+  window.addEventListener('scroll', updateQuick, { passive: true });
+  toggle.addEventListener('click', updateQuick);
+  updateQuick();
 }
 
 // ---------- Contact (home page) ----------

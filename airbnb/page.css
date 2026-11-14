@@ -356,7 +356,7 @@
 .demo__tabs { display: flex; gap: 6px; padding: 12px; background: #fff; border-bottom: 1px solid #E3E9F3; }
 .demo__tabs button {
   flex: 1;
-  padding: 8px 6px;
+  padding: 11px 6px;
   border: 0;
   border-radius: 10px;
   background: #EEF2F8;
